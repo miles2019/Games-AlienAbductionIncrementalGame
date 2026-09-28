@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_3y7fm")
 id = &"prestige5"
-display_name = "Planetensammler"
+display_name = "Serientäter"
 description = "Stiehl 5 Planeten."
 icon = ExtResource("1_7wr1l")
 stat = &"prestiges"

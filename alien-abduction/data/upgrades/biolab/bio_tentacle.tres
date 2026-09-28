@@ -13,6 +13,7 @@ category = 3
 sort_order = 20
 currency = &"biomass"
 base_cost = 20.0
+max_level = 30
 cost_scaling = 1.6
 effect_stat = &"drone_power"
 effect_value = 1.0

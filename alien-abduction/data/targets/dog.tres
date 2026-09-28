@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_ae32w")
 id = &"dog"
+kind = 1
 display_name = "Hund"
 textures = Array[Texture2D]([ExtResource("2_2m154")])
 pixel_scale = 2.6

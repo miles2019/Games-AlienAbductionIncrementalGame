@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/research.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"species1"
+display_name = "Vollständige Speziesliste"
+description = "Entdecke jeden Zieltyp eines Planeten."
+icon = ExtResource("1_icon")
+stat = &"species_complete"
+threshold = 1.0
+bonus = 0.02
+secret = false
+sort_order = 56
+reward_cosmetic = &"beam_dna"
+reward_line = "Katalog komplett! Der Strahl schimmert jetzt in DNA-Lila."

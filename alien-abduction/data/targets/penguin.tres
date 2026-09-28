@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_egp3g")
 id = &"penguin"
+kind = 1
 display_name = "Pinguin"
 textures = Array[Texture2D]([ExtResource("3_eja33")])
 pixel_scale = 2.8

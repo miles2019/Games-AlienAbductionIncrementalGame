@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_6kl36")
 id = &"ice_crystal"
+kind = 4
 display_name = "Eiskristall"
 textures = Array[Texture2D]([ExtResource("2_7i50i")])
 base_hp = 5.0

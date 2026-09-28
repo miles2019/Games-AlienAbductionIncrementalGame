@@ -9,6 +9,7 @@
 [resource]
 script = ExtResource("2_xc4bd")
 id = &"car"
+kind = 2
 display_name = "Auto"
 textures = Array[Texture2D]([ExtResource("3_7s0ng"), ExtResource("4_v0xro"), ExtResource("5_anl3o")])
 shadow_width = 32.0

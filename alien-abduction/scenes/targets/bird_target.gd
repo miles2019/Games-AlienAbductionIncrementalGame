@@ -12,6 +12,7 @@ func _on_spawned() -> void:
 func _on_scared(_from_pos: Vector2) -> void:
 	_react(0.8, false)
 	desired_velocity = desired_velocity.rotated(randf_range(-0.9, 0.9)) * 1.6
+	_dodge_time = 0.5
 	if randf() < 0.3:
 		AudioManager.play(&"tweet", randf_range(0.9, 1.3), -10.0, 0.1)
 

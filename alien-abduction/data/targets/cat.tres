@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_iwwlx")
 id = &"cat"
+kind = 1
 display_name = "Katze"
 textures = Array[Texture2D]([ExtResource("2_qouxc")])
 pixel_scale = 2.6

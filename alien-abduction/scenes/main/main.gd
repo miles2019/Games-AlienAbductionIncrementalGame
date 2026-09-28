@@ -2,7 +2,9 @@ extends Node2D
 ## Hauptszene: verbindet Welt, UFO, Spawner, Helfer, Events und HUD über Signale.
 
 const HELPER_SCENE := preload("res://scenes/ufo/helper_ufo.tscn")
-const MAX_VISIBLE := {HelperUFO.Kind.DRONE: 30, HelperUFO.Kind.PATROL: 10, HelperUFO.Kind.BEIBOOT: 4}
+## Höchstens so viele Helfer entführen gleichzeitig – sonst leert sich das Feld zu schnell.
+## Weitere gekaufte Einheiten erhöhen stattdessen die Effizienz (Belohnung) der aktiven.
+const MAX_VISIBLE := {HelperUFO.Kind.DRONE: 4, HelperUFO.Kind.PATROL: 2, HelperUFO.Kind.BEIBOOT: 1}
 const COUNT_STATS := {HelperUFO.Kind.DRONE: &"drone_count", HelperUFO.Kind.PATROL: &"patrol_count", HelperUFO.Kind.BEIBOOT: &"beiboot_count"}
 
 @onready var ground: WorldGround = $WorldGround
@@ -29,6 +31,8 @@ func _ready() -> void:
 	spawner.targets_root = targets_root
 	director.spawner = spawner
 	spawner.target_spawned.connect(_on_target_spawned)
+	spawner.population_changed.connect(hud.set_population)
+	GameManager.region_changed.connect(_on_region_changed)
 	hud.play_area_changed.connect(_on_play_area_changed)
 	hud.mothership_requested.connect(start_mothership_event)
 	GameManager.gadget_used.connect(_on_gadget_used)
@@ -44,7 +48,7 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 	_apply_planet(false)
-	spawner.spawn_burst(12)
+	spawner.fill(0.5)
 	_sync_helpers()
 	if GameManager.get_stat(&"abductions") == 0.0:
 		get_tree().create_timer(1.0).timeout.connect(func() -> void: GameManager.comment(&"start"))
@@ -70,10 +74,17 @@ func _on_play_area_changed(rect: Rect2) -> void:
 
 func _apply_planet(clear: bool) -> void:
 	spawner.planet = GameManager.current_planet
+	spawner.region = GameManager.current_region
 	ground.layout(get_viewport_rect().size, GameManager.current_planet)
 	if clear:
 		spawner.clear_all()
-		spawner.spawn_burst(12)
+		spawner.fill(0.5)
+
+
+func _on_region_changed(region: RegionData) -> void:
+	spawner.change_region(region)
+	GameManager.banner.emit(region.display_name.to_upper(), UIStyle.BLUE, 1.0)
+	AudioManager.play(&"whoosh")
 
 
 # ---------------------------------------------------------------- Eingabe
@@ -128,7 +139,7 @@ func _on_target_abducted(t: BaseTarget, source: StringName, reward_mult: float) 
 		return
 	var data := t.data
 	var pos := t.global_position
-	var rewards := GameManager.register_abduction(data, pos, source, reward_mult * t.bonus_mult)
+	var rewards := GameManager.register_abduction(data, pos, source, reward_mult * t.bonus_mult, t.capture_context())
 	var credits: float = rewards["credits"]
 	var is_player := source == &"player"
 	var is_event := source == &"mothership"
@@ -158,6 +169,12 @@ func _on_target_abducted(t: BaseTarget, source: StringName, reward_mult: float) 
 			GameManager.float_text(pos + Vector2(28, -8), "+%s Bio" % MathUtils.format_number(rewards["biomass"], true), UIStyle.CURRENCY_COLORS[&"biomass"], 15)
 		if rewards["data"] > 0.0:
 			GameManager.float_text(pos + Vector2(-28, -8), "+%d Daten" % int(rewards["data"]), UIStyle.BLUE, 17)
+		if rewards["flee_bonus"] and is_player:
+			GameManager.float_text(pos + Vector2(0, -62), "IM LAUF GEFANGEN! +%d %%" % int(round((GameManager.FLEE_BONUS - 1.0) * 100.0)), UIStyle.ACCENT, 16)
+	# Leer gefegt: alle sichtbaren Ziele sind eingesaugt
+	if is_player and spawner.population() == 0 and not GameManager.event_running:
+		GameManager._inc(&"field_cleared")
+		GameManager.banner.emit("LEER GEFEGT!", UIStyle.ACCENT, 0.9)
 	# Partikel & Sound
 	var anchor_pos := pos
 	if data.is_golden:
@@ -335,7 +352,9 @@ func start_mothership_event() -> void:
 	create_tween().tween_property(ground, "darkness", 0.0, 1.0)
 	await mothership.leave().finished
 	spawner.paused = false
-	spawner.spawn_burst(12)
+	# nach dem Massenbeam ist die Karte leer – der Nachschub rollt an
+	spawner.fill(0.2)
+	spawner.call_resupply()
 	ufo.active = true
 	hud.set_event_mode(false)
 	GameManager.event_running = false

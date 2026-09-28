@@ -14,6 +14,50 @@
 [ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="12_44lc2"]
 [ext_resource type="Resource" path="res://data/targets/robot.tres" id="13_24o24"]
 
+[ext_resource type="Script" path="res://data/region_data.gd" id="99_region"]
+
+[sub_resource type="Resource" id="Region_village"]
+script = ExtResource("99_region")
+id = &"village"
+display_name = "Dorf"
+description = "Ländlich und ruhig: viele Kühe, wenige Menschen."
+unlock_level = 1
+capacity = 0.75
+resupply = 0.8
+value_multiplier = 1.0
+weight_multipliers = {&"cow": 3.0, &"dog": 1.5, &"human": 0.6, &"car": 0.4}
+transport = &"truck"
+transport_name = "Viehtransporter"
+map_goal = 120
+
+[sub_resource type="Resource" id="Region_city"]
+script = ExtResource("99_region")
+id = &"city"
+display_name = "Großstadt"
+description = "Dicht besiedelt: Menschenmassen, Autos und Prominente."
+unlock_level = 4
+capacity = 1.6
+resupply = 1.6
+value_multiplier = 0.85
+weight_multipliers = {&"human": 2.5, &"car": 2.2, &"celebrity": 2.0, &"cat": 1.5, &"cow": 0.15}
+transport = &"bus"
+transport_name = "Linienbus"
+map_goal = 250
+
+[sub_resource type="Resource" id="Region_area51"]
+script = ExtResource("99_region")
+id = &"area51"
+display_name = "Sperrgebiet"
+description = "Kaum jemand hier – aber jedes Ziel ist wertvoll."
+unlock_level = 10
+capacity = 0.45
+resupply = 0.55
+value_multiplier = 2.5
+weight_multipliers = {&"spy": 4.0, &"robot": 3.0, &"human": 0.5, &"cow": 0.3}
+transport = &"truck"
+transport_name = "Militärlaster"
+map_goal = 80
+
 [resource]
 script = ExtResource("3_57776")
 id = &"earth"
@@ -25,4 +69,5 @@ ground_color_2 = Color(0.42, 0.67, 0.3, 1)
 detail_color = Color(0.33, 0.57, 0.25, 1)
 targets = Array[ExtResource("4_7lbku")]([ExtResource("5_viy64"), ExtResource("6_000b5"), ExtResource("7_m8bcj"), ExtResource("8_wbry5"), ExtResource("9_8rpad"), ExtResource("10_q2gmq"), ExtResource("11_5or8h"), ExtResource("12_44lc2"), ExtResource("13_24o24")])
 golden_target = ExtResource("1_csuga")
+regions = Array[ExtResource("99_region")]([SubResource("Region_village"), SubResource("Region_city"), SubResource("Region_area51")])
 rule_text = "Klassisch: Menschen, Kühe & Co."

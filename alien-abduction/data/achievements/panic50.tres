@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/multi.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"panic50"
+display_name = "Massenpanik"
+description = "Entführe 50 Ziele innerhalb von 30 Sekunden."
+icon = ExtResource("1_icon")
+stat = &"best_30s"
+threshold = 50.0
+bonus = 0.02
+secret = false
+sort_order = 41
+reward_cosmetic = &"skin_neon"
+reward_line = "Neon-Lack aufgetragen! Jetzt sieht uns wirklich jeder."

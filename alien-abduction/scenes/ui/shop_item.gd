@@ -108,7 +108,7 @@ func refresh() -> void:
 		_level.text = "AUSGERÜSTET" if equipped else ("BESITZT" if owned else "")
 		maxed = owned
 	elif upgrade.category == UpgradeData.Category.CREW:
-		_level.text = "x%d" % lvl
+		_level.text = ("x%d/%d" % [lvl, upgrade.max_level]) if upgrade.max_level > 0 else ("x%d" % lvl)
 	elif upgrade.is_one_time():
 		_level.text = "✓" if lvl > 0 else ""
 	else:
@@ -119,20 +119,22 @@ func refresh() -> void:
 		_cost.text = "Benötigt: " + _requirement_text()
 		_cost.add_theme_color_override("font_color", UIStyle.TEXT_DIM)
 	elif maxed:
-		_cost.text = "Klicken zum Ausrüsten" if cosmetic else ("ERFORSCHT" if upgrade.category == UpgradeData.Category.RESEARCH else ("ANGEHEUERT" if upgrade.category == UpgradeData.Category.CREW_MEMBER else "MAX"))
+		_cost.text = "Klicken zum Ausrüsten" if cosmetic else ("ERFORSCHT" if upgrade.category == UpgradeData.Category.RESEARCH else ("ANGEHEUERT" if upgrade.category == UpgradeData.Category.CREW_MEMBER else "MAXIMUM ERREICHT"))
 		_cost.add_theme_color_override("font_color", UIStyle.ACCENT)
 	else:
 		_cost.text = MathUtils.format_number(price) + ("  (x%d)" % amount if amount > 1 else "")
 		_cost.add_theme_color_override("font_color", UIStyle.CURRENCY_COLORS.get(upgrade.currency, UIStyle.GOLD) if afford else Color(1, 0.45, 0.45))
 	var style := _style_normal
-	if locked:
+	if locked or (maxed and not cosmetic):
 		style = _style_locked
 	elif _hover:
 		style = _style_hover
 	elif afford and not maxed:
 		style = _style_ok
 	add_theme_stylebox_override("panel", style)
-	modulate.a = 0.75 if locked else 1.0
+	# Maximum erreicht: ausgegraut, Kaufen nicht mehr möglich
+	modulate.a = 0.75 if locked else (0.6 if maxed and not cosmetic else 1.0)
+	mouse_default_cursor_shape = Control.CURSOR_ARROW if (maxed and not cosmetic) or locked else Control.CURSOR_POINTING_HAND
 
 
 func _requirement_text() -> String:

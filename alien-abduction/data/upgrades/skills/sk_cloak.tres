@@ -7,7 +7,7 @@
 script = ExtResource("2_7tj5c")
 id = &"sk_cloak"
 display_name = "Tarnkappe"
-description = "-1 % Fluchtchance pro Rang."
+description = "-1 % Fluchtchance und +25 % Reaktionszeit, bevor seltene Ziele fliehen (pro Rang)."
 icon = ExtResource("1_x3xm4")
 category = 5
 sort_order = 49
@@ -18,6 +18,8 @@ cost_scaling = 1.0
 max_level = 3
 effect_stat = &"escape_chance"
 effect_value = -0.01
+effect2_stat = &"warn_time"
+effect2_value = 0.25
 requirements = Array[String](["sk_silent"])
 resets_on_prestige = false
 branch = 1

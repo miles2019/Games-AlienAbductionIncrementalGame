@@ -1,6 +1,6 @@
 class_name OverlayPanel
 extends Control
-## Modales Fenster für Erfolge, Statistik, Planeten/Prestige, Optionen und Offline-Einnahmen.
+## Modales Fenster für Erfolge, Statistik, Planeten/Prestige, Optionen und die Willkommens-Zusammenfassung.
 
 const SHOP_ITEM := preload("res://scenes/ui/shop_item.tscn")
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 	_dim.color = Color(0.02, 0.01, 0.06, 0.7)
 	_dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_dim.gui_input.connect(func(e: InputEvent) -> void:
-		if e is InputEventMouseButton and e.pressed and _page != &"offline":
+		if e is InputEventMouseButton and e.pressed and _page != &"welcome":
 			close())
 	add_child(_dim)
 	_window = PanelContainer.new()
@@ -73,8 +73,8 @@ func show_page(page: StringName) -> void:
 			_build_planets()
 		&"options":
 			_build_options()
-		&"offline":
-			_build_offline()
+		&"welcome":
+			_build_welcome()
 	visible = true
 	_scroll.scroll_vertical = 0
 	_window.pivot_offset = _window.size * 0.5
@@ -87,8 +87,8 @@ func show_page(page: StringName) -> void:
 
 
 func close() -> void:
-	if _page == &"offline":
-		GameManager.collect_offline()
+	if _page == &"welcome":
+		GameManager.acknowledge_welcome()
 	_page = &""
 	var tw := create_tween()
 	tw.tween_property(self, "modulate:a", 0.0, 0.12)
@@ -143,6 +143,8 @@ func _build_achievements() -> void:
 		var d := UIStyle.label("Geheimer Erfolg" if secret_hidden else a.description, 12, UIStyle.TEXT_DIM, 2)
 		d.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		vb.add_child(d)
+		if a.reward_cosmetic != &"" and not secret_hidden:
+			vb.add_child(UIStyle.label("Belohnung: %s" % GameManager.cosmetic_name(a.reward_cosmetic), 12, UIStyle.PINK, 2))
 		if not done and not secret_hidden:
 			var bar := ProgressBar.new()
 			bar.custom_minimum_size = Vector2(0, 8)
@@ -317,7 +319,7 @@ func _build_options() -> void:
 	fs.toggled.connect(func(on: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if on else DisplayServer.WINDOW_MODE_WINDOWED))
 	_content.add_child(fs)
-	var help := UIStyle.label("Steuerung: Klicken oder gedrückt halten = Traktorstrahl · 1–5 = Gadgets · M = Mutterschiff · ESC = Fenster schließen", 13, UIStyle.TEXT_DIM, 2)
+	var help := UIStyle.label("Steuerung: Klicken oder gedrückt halten = Traktorstrahl · 1–5 = Gadgets · M = Mutterschiff · P = Pause · ESC = Fenster schließen. Kein Offline-Fortschritt: Die Flotte arbeitet nur, solange das Spiel läuft.", 13, UIStyle.TEXT_DIM, 2)
 	help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_content.add_child(help)
 	var save_b := UIStyle.button("Jetzt speichern", 16)
@@ -338,29 +340,40 @@ func _build_options() -> void:
 	_content.add_child(reset_b)
 
 
-# ---------------------------------------------------------------- Offline
+# ---------------------------------------------------------------- Willkommen zurück (kein Offline-Fortschritt)
 
-func _build_offline() -> void:
+func _build_welcome() -> void:
 	_title.text = "WILLKOMMEN ZURÜCK!"
-	var o := GameManager.pending_offline
-	var t := UIStyle.label("Du warst %s weg. Deine Flotte hat fleißig weiter entführt:" % MathUtils.format_time(float(o.get("seconds", 0.0))), 17, UIStyle.TEXT, 3)
+	var s := GameManager.welcome_summary
+	var t := UIStyle.label("Du warst %s weg. Während das Spiel geschlossen war, hat niemand etwas verdient –\ndie Flotte hat brav auf dich gewartet. So stand es beim letzten Mal:" % MathUtils.format_time(float(s.get("away", 0.0))), 16, UIStyle.TEXT, 3)
 	t.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_content.add_child(t)
-	var hb := HBoxContainer.new()
-	hb.add_theme_constant_override("separation", 12)
-	hb.add_child(UIStyle.icon_rect(ResourceManager.icon(ResourceManager.CREDITS), 40))
-	hb.add_child(UIStyle.label("+" + MathUtils.format_number(float(o.get("credits", 0.0))), 34, UIStyle.GOLD, 7))
-	_content.add_child(hb)
-	if float(o.get("biomass", 0.0)) > 0.0:
-		var hb2 := HBoxContainer.new()
-		hb2.add_child(UIStyle.icon_rect(ResourceManager.icon(ResourceManager.BIOMASS), 30))
-		hb2.add_child(UIStyle.label("+" + MathUtils.format_number(float(o.get("biomass", 0.0))), 24, UIStyle.CURRENCY_COLORS[&"biomass"], 5))
-		_content.add_child(hb2)
-	_content.add_child(UIStyle.label("(max. %d h, %d %% Effizienz – verbessere das im Skilltree)" % [int(UpgradeManager.stat(&"offline_hours")), int(UpgradeManager.stat(&"offline_mult") * 100.0)], 13, UIStyle.TEXT_DIM, 2))
-	var b := UIStyle.button("EINSAMMELN", 22, Color(0.2, 0.55, 0.3))
+	var where := "%s – %s" % [s.get("planet", ""), s.get("region", "")] if str(s.get("region", "")) != "" else str(s.get("planet", ""))
+	_content.add_child(UIStyle.label(where, 22, UIStyle.BLUE, 5))
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 40)
+	grid.add_theme_constant_override("v_separation", 6)
+	_content.add_child(grid)
+	var rows: Array = [
+		["Letzte Sitzung", MathUtils.format_time(float(s.get("duration", 0.0)))],
+		["Entführungen", MathUtils.format_number(float(s.get("abductions", 0.0)))],
+		["Verdiente Credits", MathUtils.format_number(float(s.get("credits", 0.0)))],
+		["Beste Combo", str(int(s.get("best_combo", 0)))],
+		["Neue Erfolge", str(int(s.get("achievements", 0)))],
+		["Level", str(int(s.get("level", GameManager.level)))],
+		["Credits auf dem Konto", MathUtils.format_number(float(s.get("credits_now", 0.0)))],
+		["Mutterschiff-Ladung", "%d %%" % int(float(s.get("mothership", 0.0)) * 100.0)],
+	]
+	for r in rows:
+		grid.add_child(UIStyle.label(r[0], 15, UIStyle.TEXT_DIM, 2))
+		grid.add_child(UIStyle.label(r[1], 15, UIStyle.GOLD, 3))
+	var hint := UIStyle.label("Tipp: Automatisierung arbeitet nur, solange das Spiel geöffnet ist. Mit [P] pausierst du ohne Fortschritt.", 13, UIStyle.TEXT_DIM, 2)
+	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_content.add_child(hint)
+	var b := UIStyle.button("WEITER ENTFÜHREN", 22, Color(0.2, 0.55, 0.3))
 	b.custom_minimum_size = Vector2(0, 56)
 	b.pressed.connect(func() -> void:
-		AudioManager.play(&"gold")
+		AudioManager.play(&"pop")
 		close())
 	_content.add_child(b)
-	GameManager.comment(&"offline")

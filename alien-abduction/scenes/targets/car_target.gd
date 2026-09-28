@@ -13,9 +13,14 @@ func _honk() -> void:
 	GameManager.float_text(global_position + Vector2(0, -body_height() - 12), ["HUP!", "HUP HUP!", "TÖÖÖT!", "Aus dem Weg!"].pick_random(), Color(1.0, 0.95, 0.5), 18)
 
 
-func _on_scared(_from_pos: Vector2) -> void:
+func _on_scared(from_pos: Vector2) -> void:
 	_react(0.5)
-	desired_velocity = desired_velocity.normalized() * speed * 1.8
+	# versucht, aus der Reichweite des UFOs zu fahren
+	var away := signf(global_position.x - from_pos.x)
+	if away == 0.0:
+		away = signf(desired_velocity.x) if desired_velocity.x != 0.0 else 1.0
+	desired_velocity = Vector2(away, 0.0) * speed * 1.8 * UpgradeManager.stat(&"flee_speed")
+	fleeing = 2.5
 	if randf() < 0.5:
 		_honk()
 

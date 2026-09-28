@@ -7,8 +7,8 @@
 script = ExtResource("2_vldkg")
 id = &"crew100"
 display_name = "Armada"
-description = "Besitze 100 Flotten-Einheiten."
+description = "Stelle die komplette Flotte auf (12 Einheiten)."
 icon = ExtResource("1_tg6kv")
 stat = &"crew_total"
-threshold = 100.0
+threshold = 12.0
 sort_order = 18

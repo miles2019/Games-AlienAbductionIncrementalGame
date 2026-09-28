@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_human_0.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"mistake1"
+display_name = "Das war nicht geplant"
+description = "Sauge ein Ziel nach einem Entführungsfehler erneut ein."
+icon = ExtResource("1_icon")
+stat = &"mistake_catches"
+threshold = 1.0
+bonus = 0.03
+secret = true
+sort_order = 55
+
+reward_line = "Zurück an Bord. Diesmal mit Anschnallgurt."

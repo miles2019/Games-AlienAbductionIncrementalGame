@@ -14,6 +14,7 @@ Ein chaotisches 2D-Incremental-Game: Als UFO entführst du Menschen, Kühe, Auto
 | Linksklick / gedrückt halten | Traktorstrahl (Dauerfeuer beim Halten) |
 | 1–5 | Gadgets (Überladung, Zeitlupe, Goldrausch, Zielverdopplung, Sofortaufladung) |
 | M | Mutterschiff rufen |
+| P | Pause (kein Fortschritt während der Pause) |
 | T | Skilltree |
 | B | Shop ein-/ausklappen |
 | ESC / Rechtsklick | Fenster schließen |
@@ -28,9 +29,11 @@ Ein chaotisches 2D-Incremental-Game: Als UFO entführst du Menschen, Kühe, Auto
 
 **M4 – Automatisierung & Mutterschiff:** Mini-Drohnen, Patrouillen-UFOs, Laser-Satelliten, Beiboote (fliegen selbst herum und saugen ein). Crew-Mitglieder mit Kommentaren. Mutterschiff-Balken → Event in Stufen (Massenbeam → Stadtentführung → Kontinentalbeam).
 
-**M5 – Skilltree & Prestige:** Federnder 4-Äste-Skilltree (Saugtechnik, Tarnung, Alien-Wirtschaft, Mutterschiff-Tech) mit Gummiseil-Verbindungen, Pan & Zoom. Planetenraub-Prestige mit Animation → Kosmischer Ruf + Ruf-Shop. 6 Planeten (Erde, Wüste, Eis, Roboter, Süßigkeiten, Miniatur) mit eigenen Zielen und Regeln. JSON-Speichersystem mit Backup, Autosave und Offline-Einnahmen.
+**M5 – Skilltree & Prestige:** Federnder 4-Äste-Skilltree (Saugtechnik, Tarnung, Alien-Wirtschaft, Mutterschiff-Tech) mit Gummiseil-Verbindungen, Pan & Zoom. Planetenraub-Prestige mit Animation → Kosmischer Ruf + Ruf-Shop. 6 Planeten (Erde, Wüste, Eis, Roboter, Süßigkeiten, Miniatur) mit eigenen Zielen und Regeln. JSON-Speichersystem mit Backup und Autosave. **Kein Offline-Fortschritt:** Beim Start erscheint stattdessen eine Zusammenfassung des letzten Spielstands.
 
-**Extras:** Bio-Labor (Biomasse), Forschung (Alien-Daten) schaltet neue Zieltypen/Events frei, 8 Zufallsereignisse (Kuh-Parade, Goldrausch, Militär mit Schutzschilden, Alien-Urlauber, Entführungsfehler, Breaking News, Riesenkuh-Boss, geheimes Sonnen-Event), 41 Erfolge mit Dauerbonus, Level/XP, Statistik, Optionen, Deko-Shop (UFO-Skins, Strahlfarben), Crew-Funk mit Sprüchen.
+**Population & Flucht:** Jeder Planet hat 3 Regionen (z. B. Dorf, Großstadt, Sperrgebiet) mit eigener Zielkapazität, Nachschubrate und Zielmischung – dünn besiedelte Regionen sind wertvoller. Nach Massenentführungen wird die Karte kurz leerer, Nachschub rollt per Bus, Zug, Laster oder Karawane an. Menschen bemerken den Lichtkegel und rennen, Tiere weichen zufällig aus, Autos fahren aus der Reichweite, seltene Ziele kündigen ihre Flucht mit einem Countdown an. Fliehende Ziele geben +25 %. Anzeige für Population, Nachschub und seltene Ziele.
+
+**Extras:** Bio-Labor (Biomasse), Forschung (Alien-Daten) schaltet neue Zieltypen/Events frei, 8 Zufallsereignisse (Kuh-Parade, Goldrausch, Militär mit Schutzschilden, Alien-Urlauber, Entführungsfehler, Breaking News, Riesenkuh-Boss, geheimes Sonnen-Event), 63 Erfolge mit Dauerbonus (teils geheim, teils mit kosmetischen Belohnungen), Level/XP, Statistik, Optionen, Deko-Shop (UFO-Skins, Strahlfarben), Crew-Funk mit Sprüchen.
 
 ## Architektur
 

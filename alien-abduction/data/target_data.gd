@@ -5,9 +5,12 @@ extends Resource
 
 enum Movement { WANDER, DRIVE, FLOCK, STATIONARY }
 enum Reaction { NONE, PANIC, STARE, HONK, RESIST, FLEE }
+## Grobe Zielart – für Statistik, Erfolge und Fluchtverhalten (Tiere weichen zufällig aus, Autos fahren weg).
+enum Kind { HUMAN, ANIMAL, VEHICLE, MACHINE, OTHER }
 
 @export var id: StringName = &""
 @export var display_name: String = ""
+@export var kind: Kind = Kind.HUMAN
 
 @export_group("Darstellung")
 ## Varianten – beim Spawnen wird eine zufällig gewählt. Spritesheet mit 4 Frames:

@@ -14,6 +14,50 @@
 [ext_resource type="Resource" path="res://data/targets/robot.tres" id="12_ujyve"]
 [ext_resource type="Resource" path="res://data/targets/bird.tres" id="13_ewgs1"]
 
+[ext_resource type="Script" path="res://data/region_data.gd" id="99_region"]
+
+[sub_resource type="Resource" id="Region_dunes"]
+script = ExtResource("99_region")
+id = &"dunes"
+display_name = "Dünenmeer"
+description = "Endlose Dünen voller Kamele."
+unlock_level = 1
+capacity = 0.7
+resupply = 0.8
+value_multiplier = 1.0
+weight_multipliers = {&"camel": 3.0, &"cactus_being": 2.0, &"nomad": 0.7}
+transport = &"caravan"
+transport_name = "Karawane"
+map_goal = 120
+
+[sub_resource type="Resource" id="Region_bazaar"]
+script = ExtResource("99_region")
+id = &"bazaar"
+display_name = "Großer Basar"
+description = "Gedränge, Feilschen, Hupkonzerte."
+unlock_level = 4
+capacity = 1.6
+resupply = 1.6
+value_multiplier = 0.85
+weight_multipliers = {&"nomad": 2.5, &"car": 2.0, &"celebrity": 2.0, &"camel": 0.5}
+transport = &"bus"
+transport_name = "Basar-Shuttle"
+map_goal = 250
+
+[sub_resource type="Resource" id="Region_oasis"]
+script = ExtResource("99_region")
+id = &"oasis"
+display_name = "Verborgene Oase"
+description = "Nur wenige finden hierher – dafür lohnt es sich."
+unlock_level = 10
+capacity = 0.45
+resupply = 0.55
+value_multiplier = 2.5
+weight_multipliers = {&"spy": 4.0, &"robot": 2.0, &"bird": 2.0}
+transport = &"caravan"
+transport_name = "Karawane"
+map_goal = 80
+
 [resource]
 script = ExtResource("3_51ow7")
 id = &"desert"
@@ -28,6 +72,7 @@ detail_color_2 = Color(0.7, 0.55, 0.35, 1)
 detail_style = &"sand"
 targets = Array[ExtResource("4_u1fd0")]([ExtResource("5_je1be"), ExtResource("6_unbrf"), ExtResource("7_ottiu"), ExtResource("8_wrvwg"), ExtResource("9_qsn67"), ExtResource("10_mhriv"), ExtResource("11_y48j6"), ExtResource("12_ujyve"), ExtResource("13_ewgs1")])
 golden_target = ExtResource("1_tsplj")
+regions = Array[ExtResource("99_region")]([SubResource("Region_dunes"), SubResource("Region_bazaar"), SubResource("Region_oasis")])
 credit_multiplier = 3.0
 target_speed_multiplier = 1.3
 rule_text = "Hitze: Alle Ziele sind 30 % schneller."

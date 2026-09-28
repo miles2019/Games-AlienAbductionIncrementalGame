@@ -13,6 +13,7 @@ category = 6
 sort_order = 68
 currency = &"ruf"
 base_cost = 1.0
+max_level = 20
 cost_scaling = 2.0
 effect_stat = &"credit_mult"
 effect_mode = 2

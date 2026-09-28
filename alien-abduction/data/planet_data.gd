@@ -20,6 +20,8 @@ extends Resource
 @export_group("Ziele")
 @export var targets: Array[TargetData] = []
 @export var golden_target: TargetData
+## Regionen mit eigener Zielkapazität und eigenem Nachschub (erste = Startregion)
+@export var regions: Array[RegionData] = []
 
 @export_group("Regeln")
 @export var credit_multiplier: float = 1.0

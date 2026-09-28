@@ -13,6 +13,50 @@
 [ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="11_aa8df"]
 [ext_resource type="Resource" path="res://data/targets/robot.tres" id="12_uh3lb"]
 
+[ext_resource type="Script" path="res://data/region_data.gd" id="99_region"]
+
+[sub_resource type="Resource" id="Region_floe"]
+script = ExtResource("99_region")
+id = &"floe"
+display_name = "Eisscholle"
+description = "Pinguine, so weit das Auge reicht."
+unlock_level = 1
+capacity = 0.7
+resupply = 0.8
+value_multiplier = 1.0
+weight_multipliers = {&"penguin": 3.0, &"ice_crystal": 1.5, &"parka": 0.6}
+transport = &"truck"
+transport_name = "Schneemobil-Konvoi"
+map_goal = 120
+
+[sub_resource type="Resource" id="Region_station"]
+script = ExtResource("99_region")
+id = &"station"
+display_name = "Forschungsstation"
+description = "Viele Forscher in dicken Jacken."
+unlock_level = 4
+capacity = 1.5
+resupply = 1.5
+value_multiplier = 0.85
+weight_multipliers = {&"parka": 2.5, &"car": 2.0, &"celebrity": 1.5, &"penguin": 0.5}
+transport = &"train"
+transport_name = "Eisbahn"
+map_goal = 250
+
+[sub_resource type="Resource" id="Region_glacier"]
+script = ExtResource("99_region")
+id = &"glacier"
+display_name = "Gletscherspalte"
+description = "Eisig, einsam und voller seltener Funde."
+unlock_level = 10
+capacity = 0.45
+resupply = 0.55
+value_multiplier = 2.5
+weight_multipliers = {&"ice_crystal": 3.0, &"spy": 3.0, &"robot": 2.0}
+transport = &"truck"
+transport_name = "Schneemobil-Konvoi"
+map_goal = 80
+
 [resource]
 script = ExtResource("3_5wfyl")
 id = &"ice"
@@ -26,6 +70,7 @@ detail_color = Color(0.62, 0.8, 0.95, 1)
 detail_style = &"snow"
 targets = Array[ExtResource("4_rr76k")]([ExtResource("5_2jqbh"), ExtResource("6_x3fn8"), ExtResource("7_nu6aw"), ExtResource("8_rjet6"), ExtResource("9_5vyix"), ExtResource("10_fkqfu"), ExtResource("11_aa8df"), ExtResource("12_uh3lb")])
 golden_target = ExtResource("1_i76yf")
+regions = Array[ExtResource("99_region")]([SubResource("Region_floe"), SubResource("Region_station"), SubResource("Region_glacier")])
 credit_multiplier = 10.0
 slippery = true
 rule_text = "Glatteis: Ziele rutschen unkontrolliert."

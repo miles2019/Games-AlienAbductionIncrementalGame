@@ -24,12 +24,21 @@ var _timer: float = 0.0
 var _anim: float = 0.0
 var _wander_goal: Vector2
 var _cfg: Dictionary
+## Vom Urlaubs-UFO eingesaugte Ziele (Erfolg "Urlaub auf der Erde")
+var _captured_total: int = 0
+## Pausen-Deko: rein kosmetisch, erzeugt keinen Fortschritt
+var _pause_goal: Vector2
+var _pause_anim: float = 0.0
+
+const VACATION_GOAL := 12
 
 @onready var sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
 	_cfg = CONFIG[kind]
+	# läuft auch in der Pause weiter – dann aber nur mit kosmetischen Aktivitäten
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	sprite.texture = load(_cfg["tex"])
 	sprite.hframes = 2
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -62,6 +71,12 @@ func _move_speed() -> float:
 
 
 func _process(delta: float) -> void:
+	if get_tree().paused:
+		_pause_idle(delta)
+		return
+	if _pause_anim > 0.0:
+		_pause_anim = 0.0
+		queue_redraw()
 	_anim += delta
 	sprite.frame = int(_anim * 5.0) % 2
 	sprite.position.y = sin(_anim * 3.0) * 3.0
@@ -119,6 +134,7 @@ func _fire() -> void:
 			b.source_offset = Vector2(0, 8)
 			get_parent().add_child(b)
 			captured += 1
+			_captured_total += 1
 		elif res == BaseTarget.HitResult.DAMAGED:
 			var fb := TractorBeam.new()
 			fb.setup(self, null, t.body_center(), _beam_color(), true, 12.0)
@@ -173,8 +189,13 @@ func _find_target() -> BaseTarget:
 	return best
 
 
-func _valid(t: BaseTarget) -> bool:
-	return is_instance_valid(t) and t.is_catchable() and field.grow(40.0).has_point(t.global_position)
+## Untypisierter Parameter: das Ziel kann bereits freigegeben sein (z. B. nach einem Regionswechsel),
+## ein typisierter Parameter würde dann einen Fehler auslösen.
+func _valid(t: Variant) -> bool:
+	if not is_instance_valid(t):
+		return false
+	var bt := t as BaseTarget
+	return bt != null and bt.is_catchable() and field.grow(40.0).has_point(bt.global_position)
 
 
 func _fly_to(goal: Vector2, delta: float, speed_factor: float) -> void:
@@ -194,6 +215,35 @@ func _random_point() -> Vector2:
 
 func fly_away() -> void:
 	set_process(false)
+	if kind == Kind.VACATION and _captured_total >= VACATION_GOAL:
+		GameManager._inc(&"vacation_full")
+		GameManager.float_text(global_position + Vector2(0, -40), "Urlaub voll ausgekostet! (%d Ziele)" % _captured_total, UIStyle.PINK, 20)
 	var tw := create_tween()
 	tw.tween_property(self, "global_position:y", -150.0, 0.8).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tw.tween_callback(queue_free)
+
+
+## Pause: Drohnen dösen, drehen langsame Runden und schnarchen – ohne echte Entführungen
+func _pause_idle(delta: float) -> void:
+	if _pause_anim == 0.0:
+		_pause_goal = _random_point()
+	_pause_anim += delta
+	sprite.frame = int(_pause_anim * 1.5) % 2
+	sprite.position.y = sin(_pause_anim * 1.2) * 5.0
+	var dir := _pause_goal - global_position
+	if dir.length() < 8.0:
+		_pause_goal = _random_point()
+	else:
+		global_position += dir.normalized() * 25.0 * delta
+	sprite.rotation = sin(_pause_anim * 0.8) * 0.12
+	queue_redraw()
+
+
+func _draw() -> void:
+	if not is_inside_tree() or not get_tree().paused:
+		return
+	var font := ThemeDB.fallback_font
+	for i in 3:
+		var k := fmod(_pause_anim * 0.6 + i / 3.0, 1.0)
+		var p := Vector2(14.0 + k * 18.0, -18.0 - k * 26.0)
+		draw_string(font, p, "z" if i < 2 else "Z", HORIZONTAL_ALIGNMENT_LEFT, -1, int(10 + k * 8), Color(1, 1, 1, 1.0 - k))

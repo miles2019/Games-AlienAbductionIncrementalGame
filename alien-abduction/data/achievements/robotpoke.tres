@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_robot.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"robotpoke"
+display_name = "Bitte nicht anfassen"
+description = "Klicke einen Roboter an, obwohl der Strahl zu schwach ist."
+icon = ExtResource("1_icon")
+stat = &"robot_deflects"
+threshold = 1.0
+bonus = 0.03
+secret = true
+sort_order = 47
+
+reward_line = "KLONK. Der Roboter hat sich beschwert. Schriftlich."

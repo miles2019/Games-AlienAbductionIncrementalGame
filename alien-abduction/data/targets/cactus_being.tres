@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_cwsrd")
 id = &"cactus_being"
+kind = 4
 display_name = "Kaktuswesen"
 textures = Array[Texture2D]([ExtResource("3_2kgws")])
 scene = ExtResource("1_wjxp6")

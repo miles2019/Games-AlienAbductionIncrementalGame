@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/speed.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"dodge1"
+display_name = "Fliegender Wechsel"
+description = "Erwische ein Ziel mitten in einer Ausweichbewegung."
+icon = ExtResource("1_icon")
+stat = &"dodge_catches"
+threshold = 1.0
+bonus = 0.02
+secret = false
+sort_order = 48
+
+reward_line = "Haken geschlagen – und trotzdem erwischt!"

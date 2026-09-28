@@ -7,14 +7,14 @@
 script = ExtResource("2_qku61")
 id = &"ruf_veteran"
 display_name = "Veteranen-Drohnen"
-description = "Starte mit 5 Mini-Drohnen pro Stufe."
+description = "Starte jeden Planeten mit 1 Mini-Drohne pro Stufe."
 icon = ExtResource("1_fuwkg")
 category = 6
 sort_order = 70
 currency = &"ruf"
 base_cost = 2.0
 cost_scaling = 2.0
-max_level = 10
+max_level = 4
 effect_stat = &"start_drones"
-effect_value = 5.0
+effect_value = 1.0
 resets_on_prestige = false

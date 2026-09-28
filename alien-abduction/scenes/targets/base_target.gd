@@ -37,6 +37,18 @@ var bonus_mult: float = 1.0
 var force_straight: bool = false
 var lift_source: StringName = &"player"
 var desired_velocity: Vector2 = Vector2.ZERO
+## Wurde durch einen Entführungsfehler abgeworfen (Erfolg "Das war nicht geplant")
+var from_mistake: bool = false
+## Sekunden, in denen die Flugbahn als "verändert" gilt (Kettenreaktion, Rutschen, Absturz aus dem Strahl)
+var trajectory_changed: float = 0.0
+## Sekunden aktiver Flucht (rennt weg, schlägt Haken)
+var fleeing: float = 0.0
+
+## Grund-Wahrscheinlichkeit pro Prüfung, dass ein Mensch den Lichtkegel bemerkt
+const NOTICE_CHANCE := 0.22
+const NOTICE_RADIUS := 130.0
+## Vorwarnzeit (s), bevor seltene Ziele fliehen
+const WARN_TIME := 2.5
 
 var _velocity: Vector2 = Vector2.ZERO
 var _turn_timer: float = 0.0
@@ -53,6 +65,16 @@ var _flash: float = 0.0
 var _ground_y: float = 0.0
 var _frame_size: Vector2 = Vector2(16, 16)
 var _was_inside: bool = false
+var _dodge_time: float = 0.0
+var _erratic_timer: float = 0.0
+var _notice_timer: float = 0.0
+## Vorwarnung seltener Ziele: < 0 = keine, sonst verbleibende Sekunden bis zur Flucht
+var _warn_left: float = -1.0
+var _warn_total: float = 1.0
+var _warned: bool = false
+## Ein Ziel kann dem Strahl nur einmal entkommen
+var _lift_escaped: bool = false
+var _capture_ctx: Dictionary = {}
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -128,6 +150,53 @@ func is_lifting() -> bool:
 	return state == State.LIFT
 
 
+## Ist das Ziel gerade auf der Flucht? (wegrennen oder angekündigte Flucht seltener Ziele)
+func is_fleeing() -> bool:
+	return fleeing > 0.0 or _warn_left >= 0.0 or (state == State.LEAVE and _warned)
+
+
+func is_warning() -> bool:
+	return _warn_left >= 0.0
+
+
+## Kontext beim Einfangen (für Belohnung & Erfolge) – wird in start_lift() festgehalten
+func capture_context() -> Dictionary:
+	return _capture_ctx
+
+
+func _build_capture_context() -> Dictionary:
+	var close := false
+	if _warn_left >= 0.0 and _warn_left < 1.0:
+		close = true
+	elif state == State.LEAVE:
+		close = _seconds_until_exit() < 1.0
+	return {
+		"fleeing": is_fleeing(),
+		"dodging": _dodge_time > 0.0,
+		"close_call": close,
+		"last_moment": close or (_warned and (state == State.LEAVE or _warn_left < 1.0)),
+		"trajectory": trajectory_changed > 0.0,
+		"mistake": from_mistake,
+	}
+
+
+## Geschätzte Zeit, bis ein fliehendes Ziel den sichtbaren Bereich verlässt
+func _seconds_until_exit() -> float:
+	var v := _velocity * UpgradeManager.stat(&"target_speed")
+	if not field.has_point(position):
+		return 0.0
+	var t := INF
+	if v.x < -1.0:
+		t = minf(t, (position.x - field.position.x) / -v.x)
+	elif v.x > 1.0:
+		t = minf(t, (field.end.x - position.x) / v.x)
+	if v.y < -1.0:
+		t = minf(t, (position.y - field.position.y) / -v.y)
+	elif v.y > 1.0:
+		t = minf(t, (field.end.y - position.y) / v.y)
+	return t
+
+
 # ---------------------------------------------------------------- Bewegung
 
 func _process(delta: float) -> void:
@@ -137,10 +206,13 @@ func _process(delta: float) -> void:
 	_hp_bar_time = maxf(0.0, _hp_bar_time - delta)
 	var speed_factor := UpgradeManager.stat(&"target_speed")
 	anim_time += delta * (0.4 + speed_factor * 0.6)
+	trajectory_changed = maxf(0.0, trajectory_changed - delta)
+	_dodge_time = maxf(0.0, _dodge_time - delta)
 	if state == State.LIFT or state == State.FALL:
 		sprite.frame = mini(3, sprite.hframes - 1)
 		queue_redraw()
 		return
+	_process_flight(delta)
 	if frozen > 0.0:
 		frozen -= delta
 		_update_animation(true)
@@ -168,6 +240,9 @@ func _process(delta: float) -> void:
 	# Geschwindigkeit anwenden (auf dem Eisplaneten mit Trägheit)
 	if slippery:
 		_velocity = _velocity.lerp(desired_velocity, 1.0 - exp(-1.2 * delta))
+		# deutliches Rutschen = veränderte Flugbahn
+		if (_velocity - desired_velocity).length() > speed * 0.8:
+			trajectory_changed = maxf(trajectory_changed, 0.3)
 	else:
 		_velocity = desired_velocity
 	position += _velocity * speed_factor * delta
@@ -178,6 +253,11 @@ func _process(delta: float) -> void:
 		_was_inside = true
 	var out_margin := 90.0 * scale_mult + _frame_size.x * data.pixel_scale
 	if not field.grow(out_margin).has_point(position) and (_was_inside or age > 45.0):
+		if _warned:
+			# seltenes Ziel ist entkommen – es taucht nicht wieder auf
+			GameManager._inc(&"rare_fled")
+			var inner := field.grow(-40.0)
+			GameManager.float_text(position.clamp(inner.position, inner.end), "%s ist entkommen!" % data.display_name, Color(1, 0.6, 0.4), 18)
 		queue_free()
 		return
 	_update_animation(false)
@@ -198,13 +278,66 @@ func _roam(delta: float) -> void:
 					var ang := randf() * TAU
 					desired_velocity = Vector2(cos(ang), sin(ang) * 0.7).normalized() * speed
 			if age > lifetime:
-				_start_leaving()
+				_lifetime_over()
 		TargetData.Movement.STATIONARY:
 			desired_velocity = Vector2.ZERO
 			if age > lifetime:
-				_fade_out()
+				_lifetime_over()
 		_:
 			pass
+
+
+## Lebenszeit abgelaufen: normale Ziele gehen, seltene kündigen ihre Flucht vorher gut sichtbar an
+func _lifetime_over() -> void:
+	if _warn_left >= 0.0:
+		return
+	if (data.is_rare or data.is_golden) and not data.is_boss and not _warned:
+		_warned = true
+		_warn_total = WARN_TIME * UpgradeManager.stat(&"warn_time") * (1.6 if data.is_golden else 1.25)
+		_warn_left = _warn_total
+		GameManager.float_text(global_position + Vector2(0, -body_height() - 24), "Will fliehen!", Color(1, 0.55, 0.35), 18)
+		AudioManager.play(&"deny", 1.4, -6.0, 0.3)
+		if randf() < 0.5:
+			GameManager.comment(&"flee")
+		return
+	if data.movement == TargetData.Movement.STATIONARY and not _warned:
+		_fade_out()
+	else:
+		_start_leaving()
+
+
+## Fluchtverhalten: Lichtkegel bemerken, Haken schlagen, Vorwarnung seltener Ziele
+func _process_flight(delta: float) -> void:
+	if frozen > 0.0:
+		return
+	# Vorwarnung läuft ab -> Flucht (höchstens einmal, niemals Rückkehr)
+	if _warn_left >= 0.0:
+		_warn_left -= delta
+		if _warn_left < 0.0:
+			_warn_left = -1.0
+			fleeing = 99.0
+			_start_leaving()
+			desired_velocity = desired_velocity.normalized() * speed * 1.7 * UpgradeManager.stat(&"flee_speed")
+		return
+	if fleeing > 0.0:
+		fleeing -= delta
+		# schnelle Ziele schlagen unregelmäßig Haken
+		if state != State.LEAVE and data.kind != TargetData.Kind.VEHICLE and (data.reaction == TargetData.Reaction.FLEE or data.speed_max >= 60.0):
+			_erratic_timer -= delta
+			if _erratic_timer <= 0.0 and desired_velocity.length() > 1.0:
+				_erratic_timer = randf_range(0.3, 0.7)
+				desired_velocity = desired_velocity.rotated(randf_range(0.5, 1.1) * (1.0 if randf() < 0.5 else -1.0))
+				_dodge_time = 0.45
+	# Menschen bemerken den Lichtkegel unter dem UFO und rennen los
+	if data.kind == TargetData.Kind.HUMAN and data.reaction == TargetData.Reaction.PANIC and state == State.ROAM \
+			and not GameManager.event_running:
+		_notice_timer -= delta
+		if _notice_timer <= 0.0:
+			_notice_timer = 0.5
+			var ufo_pos := get_global_mouse_position()
+			if ufo_pos.distance_to(global_position) < NOTICE_RADIUS * UpgradeManager.stat(&"scare_radius") and randf() < NOTICE_CHANCE:
+				_say(["Da oben!", "Ein Lichtkegel!", "LAUF!", "Nicht schon wieder!"], 0.5, Color(1, 0.9, 0.7))
+				scare(ufo_pos)
 
 
 func _keep_in_field() -> void:
@@ -267,6 +400,7 @@ func hit(power: float, source_node: Node2D, source: StringName, lift_time: float
 		return HitResult.NONE
 	if data.min_power > 0.0 and power < data.min_power:
 		_on_deflected(source_node)
+		GameManager.register_deflect(data, source)
 		return HitResult.DEFLECTED
 	var dmg := power * (UpgradeManager.stat(&"boss_damage") if data.is_boss else 1.0)
 	hp -= dmg
@@ -283,6 +417,9 @@ func hit(power: float, source_node: Node2D, source: StringName, lift_time: float
 func start_lift(anchor: Node2D, source: StringName, duration: float, allow_escape: bool = true, p_reward_mult: float = 1.0) -> void:
 	if state == State.LIFT:
 		return
+	_capture_ctx = _build_capture_context()
+	_warn_left = -1.0
+	fleeing = 0.0
 	_set_state(State.LIFT)
 	marked = false
 	shielded = false
@@ -295,7 +432,7 @@ func start_lift(anchor: Node2D, source: StringName, duration: float, allow_escap
 	z_index = 20
 	_spin = randf_range(-6.0, 6.0)
 	_escape_at = -1.0
-	if allow_escape:
+	if allow_escape and not _lift_escaped:
 		var chance := maxf(0.0, data.escape_chance + UpgradeManager.stat(&"escape_chance"))
 		if randf() < chance:
 			_escape_at = randf_range(0.4, 0.6)
@@ -332,12 +469,18 @@ func _finish_lift() -> void:
 
 func _escape() -> void:
 	_escape_at = -1.0
+	_lift_escaped = true
+	trajectory_changed = 3.0
+	var inner := field.grow(-20.0)
+	var land_x := clampf(_lift_from.x + randf_range(-30, 30), inner.position.x, inner.end.x)
+	var land_y := clampf(_ground_y, inner.position.y + body_height(), inner.end.y)
+	_ground_y = land_y
 	if _lift_tween:
 		_lift_tween.kill()
 	_set_state(State.FALL)
 	var tw := create_tween().set_parallel(true)
-	tw.tween_property(self, "global_position:y", _ground_y, 0.7).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	tw.tween_property(self, "global_position:x", _lift_from.x + randf_range(-30, 30), 0.7)
+	tw.tween_property(self, "global_position:y", land_y, 0.7).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tw.tween_property(self, "global_position:x", land_x, 0.7)
 	tw.tween_property(self, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tw.tween_property(sprite, "rotation", 0.0, 0.4)
 	tw.chain().tween_callback(func() -> void:
@@ -380,7 +523,18 @@ func _run_away(from_pos: Vector2, factor: float = 2.4) -> void:
 	var away := (global_position - from_pos)
 	if away.length() < 1.0:
 		away = Vector2(randf_range(-1, 1), randf_range(-1, 1))
-	desired_velocity = away.normalized() * speed * factor
+	# Tarnungs-Upgrades verlangsamen Fliehende; die letzten Ziele werden NICHT schneller
+	desired_velocity = away.normalized() * speed * factor * UpgradeManager.stat(&"flee_speed")
+	fleeing = maxf(fleeing, react_duration + 1.2)
+
+
+## Tiere weichen eher zufällig aus statt gezielt wegzurennen
+func _dodge_randomly(factor: float = 2.0) -> void:
+	var dir := desired_velocity.normalized() if desired_velocity.length() > 1.0 else Vector2.RIGHT.rotated(randf() * TAU)
+	dir = dir.rotated(randf_range(PI * 0.35, PI * 0.8) * (1.0 if randf() < 0.5 else -1.0))
+	desired_velocity = dir * speed * factor * UpgradeManager.stat(&"flee_speed")
+	_dodge_time = 0.6
+	fleeing = maxf(fleeing, 1.0)
 
 
 func _say(lines: Array[String], chance: float = 1.0, color: Color = Color.WHITE) -> void:
@@ -397,7 +551,10 @@ func _on_scared(from_pos: Vector2) -> void:
 	match data.reaction:
 		TargetData.Reaction.PANIC, TargetData.Reaction.FLEE:
 			_react(1.6)
-			_run_away(from_pos)
+			if data.kind == TargetData.Kind.ANIMAL:
+				_dodge_randomly(2.2)
+			else:
+				_run_away(from_pos)
 		TargetData.Reaction.STARE:
 			_react(1.4)
 			desired_velocity = Vector2.ZERO
@@ -460,6 +617,14 @@ func _draw() -> void:
 		draw_rect(Rect2(-14, by - 9, 28, 16), Color(1.0, 0.85, 0.25))
 		draw_rect(Rect2(-14, by - 9, 28, 16), Color(0.4, 0.2, 0.0), false, 2.0)
 		draw_string(ThemeDB.fallback_font, Vector2(-11, by + 4), "x%d" % int(bonus_mult), HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(0.3, 0.1, 0.0))
+	# gut sichtbare Vorwarnung, bevor ein seltenes Ziel flieht (faire Reaktionschance)
+	if _warn_left >= 0.0 and state != State.LIFT:
+		var k := clampf(_warn_left / maxf(0.01, _warn_total), 0.0, 1.0)
+		var wc := Color(1.0, 0.35, 0.25).lerp(Color(1.0, 0.85, 0.3), k)
+		var wy := top - 30.0 - absf(sin(anim_time * 8.0)) * 5.0
+		draw_circle(Vector2(0, wy), 13.0, Color(0.1, 0.02, 0.05, 0.85))
+		draw_arc(Vector2(0, wy), 13.0, -PI / 2.0, -PI / 2.0 + TAU * k, 24, wc, 3.0)
+		draw_string(ThemeDB.fallback_font, Vector2(-4, wy + 6), "!", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, wc)
 	if marked and state != State.LIFT:
 		var c := Color(1, 0.3, 0.35, 0.9)
 		var ctr := Vector2(0, top * 0.5)

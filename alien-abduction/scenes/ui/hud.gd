@@ -17,6 +17,8 @@ var _toasts: HudWidgets.ToastStack
 var _chat: HudWidgets.CrewChat
 var _news: HudWidgets.NewsTicker
 var _buffs: HudWidgets.BuffBar
+var _population: HudWidgets.PopulationPanel
+var _pause: HudWidgets.PauseOverlay
 var _banner: Label
 var _coin_layer: Control
 var _flash: ColorRect
@@ -41,6 +43,8 @@ func _ready() -> void:
 	# Widgets
 	_buffs = HudWidgets.BuffBar.new()
 	root.add_child(_buffs)
+	_population = HudWidgets.PopulationPanel.new()
+	root.add_child(_population)
 	_news = HudWidgets.NewsTicker.new()
 	root.add_child(_news)
 	_toasts = HudWidgets.ToastStack.new()
@@ -67,6 +71,8 @@ func _ready() -> void:
 	_flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_flash.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_child(_flash)
+	_pause = HudWidgets.PauseOverlay.new()
+	root.add_child(_pause)
 	top_bar.menu_requested.connect(_on_menu)
 	shop.collapsed_changed.connect(func(_c: bool) -> void: _relayout())
 	get_viewport().size_changed.connect(_relayout)
@@ -75,8 +81,9 @@ func _ready() -> void:
 		if id == &"sun":
 			_sun_tint.color.a = 0.18 if remaining > 0.0 else 0.0)
 	_relayout.call_deferred()
-	if not GameManager.pending_offline.is_empty():
-		overlay.show_page.call_deferred(&"offline")
+	# Kein Offline-Fortschritt – stattdessen eine kurze Zusammenfassung des letzten Spielstands
+	if not GameManager.welcome_summary.is_empty():
+		overlay.show_page.call_deferred(&"welcome")
 
 
 func play_area() -> Rect2:
@@ -91,6 +98,7 @@ func _relayout() -> void:
 	mothership_bar.position = Vector2(cx - mothership_bar.size.x * 0.5, area.position.y + 8)
 	mothership_bar.size.x = 420
 	_buffs.position = Vector2(12, area.position.y + 10)
+	_population.position = Vector2(area.end.x - _population.size.x - 12.0, area.position.y + 64.0)
 	_news.position = Vector2(area.position.x + 20, area.end.y - 120)
 	_news.size = Vector2(area.size.x - 40, 30)
 	_toasts.position = Vector2(12, area.position.y + 50)
@@ -109,6 +117,7 @@ func _process(delta: float) -> void:
 	var area := play_area()
 	_gadgets.position = Vector2(area.end.x - _gadgets.size.x - 14, area.end.y - 78)
 	mothership_bar.position.x = area.get_center().x - mothership_bar.size.x * 0.5
+	_population.position = Vector2(area.end.x - _population.size.x - 12.0, area.position.y + 64.0)
 	_chat.position.y = area.end.y - _chat.size.y - 12
 	# fliegende Münzen
 	for f in _flyers:
@@ -203,3 +212,10 @@ func _draw_flyers() -> void:
 		var squash := absf(cos(f["t"] * 14.0))
 		var sz := Vector2(22 * (0.35 + 0.65 * squash), 22) * (1.0 - e * 0.3)
 		_coin_layer.draw_texture_rect(tex, Rect2(p - sz * 0.5, sz), false)
+
+
+# ---------------------------------------------------------------- Population
+
+func set_population(info: Dictionary) -> void:
+	if _population:
+		_population.set_info(info)

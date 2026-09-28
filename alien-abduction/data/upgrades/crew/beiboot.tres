@@ -12,6 +12,7 @@ icon = ExtResource("1_ylovg")
 category = 1
 sort_order = 13
 base_cost = 120000.0
+max_level = 1
 cost_scaling = 1.2
 effect_stat = &"beiboot_count"
 effect_value = 1.0

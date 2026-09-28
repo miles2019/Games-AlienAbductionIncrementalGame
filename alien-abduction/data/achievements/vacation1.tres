@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/star.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"vacation1"
+display_name = "Urlaub auf der Erde"
+description = "Lass das Helfer-UFO während seines Besuchs mindestens 12 Ziele einsaugen."
+icon = ExtResource("1_icon")
+stat = &"vacation_full"
+threshold = 1.0
+bonus = 0.03
+secret = true
+sort_order = 53
+
+reward_line = "Der Urlauber schreibt uns eine Postkarte: 'Beste Reise ever.'"

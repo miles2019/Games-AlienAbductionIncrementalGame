@@ -7,7 +7,7 @@
 script = ExtResource("2_25qf1")
 id = &"range"
 display_name = "Saug-Reichweite"
-description = "Größerer Fangradius."
+description = "Größerer Fangradius – schnelle und fliehende Ziele lassen sich leichter abfangen."
 icon = ExtResource("1_p82l4")
 sort_order = 1
 base_cost = 20.0

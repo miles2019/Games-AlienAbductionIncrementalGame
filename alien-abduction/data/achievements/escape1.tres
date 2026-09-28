@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_5rnrs")
 id = &"escape1"
-display_name = "Das war nicht geplant"
+display_name = "Rutschige Hände"
 description = "Ein Ziel entkommt im letzten Moment."
 icon = ExtResource("1_gxu0q")
 stat = &"escapes"

@@ -13,6 +13,7 @@ category = 3
 sort_order = 21
 currency = &"biomass"
 base_cost = 25.0
+max_level = 30
 cost_scaling = 1.55
 effect_stat = &"xp_mult"
 effect_mode = 1

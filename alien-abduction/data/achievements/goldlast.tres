@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_golden_cow.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"goldlast"
+display_name = "Goldene Gelegenheit"
+description = "Erwische ein goldenes Ziel im letzten Moment."
+icon = ExtResource("1_icon")
+stat = &"gold_last_moment"
+threshold = 1.0
+bonus = 0.03
+secret = true
+sort_order = 45
+reward_cosmetic = &"beam_sparkle"
+reward_line = "In letzter Sekunde! Der Strahl glitzert jetzt vor Stolz."

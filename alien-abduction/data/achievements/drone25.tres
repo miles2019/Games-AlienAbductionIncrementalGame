@@ -7,8 +7,8 @@
 script = ExtResource("2_uebgd")
 id = &"drone25"
 display_name = "Schwarmintelligenz"
-description = "Besitze 25 Mini-Drohnen."
+description = "Besitze die maximale Anzahl Mini-Drohnen (4)."
 icon = ExtResource("1_ftu6t")
 stat = &"drones"
-threshold = 25.0
+threshold = 4.0
 sort_order = 17

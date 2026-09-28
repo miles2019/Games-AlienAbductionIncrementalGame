@@ -10,6 +10,7 @@ display_name = "Saugkraft"
 description = "+1 Saugkraft (Schaden pro Strahl) und +15 % Credits."
 icon = ExtResource("1_48wam")
 cost_scaling = 1.45
+max_level = 100
 effect_stat = &"click_power"
 effect_value = 1.0
 effect2_stat = &"credit_mult"

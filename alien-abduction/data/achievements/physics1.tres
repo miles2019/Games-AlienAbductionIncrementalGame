@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/double.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"physics1"
+display_name = "Unfaire Physik"
+description = "Entführe ein Ziel, dessen Flugbahn gerade verändert wurde."
+icon = ExtResource("1_icon")
+stat = &"physics_catches"
+threshold = 1.0
+bonus = 0.03
+secret = true
+sort_order = 54
+
+reward_line = "Newton würde weinen."

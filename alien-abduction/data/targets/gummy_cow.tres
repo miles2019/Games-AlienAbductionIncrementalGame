@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_dt6gm")
 id = &"gummy_cow"
+kind = 1
 display_name = "Gummikuh"
 textures = Array[Texture2D]([ExtResource("3_f3p4b")])
 shadow_width = 22.0

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/skin_disco.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"skins10"
+display_name = "UFO-Fan"
+description = "Schalte zehn verschiedene UFO-Skins frei."
+icon = ExtResource("1_icon")
+stat = &"skins_owned"
+threshold = 10.0
+bonus = 0.02
+secret = false
+sort_order = 58
+
+reward_line = "Zehn Skins. Der Hangar ist jetzt offiziell ein Modehaus."

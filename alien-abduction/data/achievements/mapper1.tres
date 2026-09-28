@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/planet_earth.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"mapper1"
+display_name = "Kartograf"
+description = "Kartografiere alle Regionen eines Planeten vollständig."
+icon = ExtResource("1_icon")
+stat = &"planets_mapped"
+threshold = 1.0
+bonus = 0.02
+secret = false
+sort_order = 57
+reward_cosmetic = &"skin_map"
+reward_line = "Karte fertig! Das UFO bekommt einen Tarnlack im Kartenlook."

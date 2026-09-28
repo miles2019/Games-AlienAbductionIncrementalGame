@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crew_zorg.png" id="1_icon"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = &"crewboss"
+display_name = "Crew-Chef"
+description = "Heuere auf einem Planeten alle Crew-Mitglieder an."
+icon = ExtResource("1_icon")
+stat = &"crew_members"
+threshold = 5.0
+bonus = 0.02
+secret = false
+sort_order = 59
+
+reward_line = "Die ganze Crew an Bord! Wer kocht heute?"

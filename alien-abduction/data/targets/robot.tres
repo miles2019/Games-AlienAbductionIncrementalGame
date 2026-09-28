@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_y5kog")
 id = &"robot"
+kind = 3
 display_name = "Roboter"
 textures = Array[Texture2D]([ExtResource("2_386h2")])
 base_hp = 25.0

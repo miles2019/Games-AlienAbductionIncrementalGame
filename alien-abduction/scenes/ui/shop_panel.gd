@@ -99,7 +99,11 @@ func _ready() -> void:
 	header.add_child(_toggle)
 	UpgradeManager.levels_changed.connect(_rebuild)
 	GameManager.feature_unlocked.connect(func(_f: StringName) -> void: _refresh_tabs())
-	GameManager.cosmetics_changed.connect(_refresh_items)
+	GameManager.cosmetics_changed.connect(func() -> void:
+		if current_tab == &"deco":
+			_rebuild()
+		else:
+			_refresh_items())
 	GameManager.game_reset.connect(func() -> void: select_tab(&"ufo"))
 	_refresh_tabs()
 	select_tab(&"ufo")
@@ -155,6 +159,36 @@ func _rebuild() -> void:
 			item.buy_pressed.connect(_on_buy)
 			_list.add_child(item)
 			_items.append(item)
+	if current_tab == &"deco":
+		_add_reward_cosmetics()
+
+
+## Kosmetik aus Erfolgen: nicht käuflich, nur freischaltbar
+func _add_reward_cosmetics() -> void:
+	var sep := UIStyle.label("— ERFOLGS-BELOHNUNGEN —", 13, UIStyle.PINK, 3)
+	sep.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_list.add_child(sep)
+	for id in GameManager.achievement_cosmetics():
+		var c: Dictionary = GameManager.COSMETICS[id]
+		var owned := GameManager.cosmetic_owned(id)
+		var equipped := String(id) == str(GameManager.settings.get("skin")) or String(id) == str(GameManager.settings.get("beam"))
+		var b := UIStyle.button("", 13)
+		b.custom_minimum_size = Vector2(0, 40)
+		b.focus_mode = Control.FOCUS_NONE
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		var ach := GameManager.achievement_by_id(c["achievement"])
+		if owned:
+			b.text = "%s%s" % [GameManager.cosmetic_name(id), "  ✓ AUSGERÜSTET" if equipped else "  – ausrüsten"]
+			if c["type"] == "beam":
+				b.add_theme_color_override("font_color", c["color"])
+			b.pressed.connect(func() -> void:
+				GameManager.equip_cosmetic(id)
+				AudioManager.play(&"pop"))
+		else:
+			var unknown := ach == null or (ach.secret and not GameManager.unlocked_achievements.has(ach.id))
+			b.text = "🔒 %s  (Erfolg: %s)" % [GameManager.cosmetic_name(id), "???" if unknown else ach.display_name]
+			b.disabled = true
+		_list.add_child(b)
 
 
 func _refresh_items() -> void:

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_j8qrx")
 id = &"first"
-display_name = "Hallo, Erdling!"
+display_name = "Erster Kontakt"
 description = "Entführe dein erstes Ziel."
 icon = ExtResource("1_yrkli")
 stat = &"abductions"

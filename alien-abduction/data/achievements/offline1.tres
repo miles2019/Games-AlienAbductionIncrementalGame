@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("2_udbrq")
 id = &"offline1"
-display_name = "Schlafwandler"
-description = "Sammle Offline-Einnahmen ein."
+display_name = "Willkommen zurück"
+description = "Kehre nach einer Pause zu deiner Crew zurück."
 icon = ExtResource("1_2rmdn")
-stat = &"offline_collected"
+stat = &"returns"
 sort_order = 38

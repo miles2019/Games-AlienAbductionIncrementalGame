@@ -32,6 +32,7 @@ func _apply_skin() -> void:
 	sprite.texture = GameManager.ufo_texture()
 	sprite.hframes = 2
 	sprite.scale = _base_scale
+	sprite.self_modulate = GameManager.ufo_tint()
 
 
 func _process(delta: float) -> void:
@@ -126,7 +127,10 @@ func _try_chain(origin: BaseTarget, power: float, lift_time: float, color: Color
 	if chance <= 0.0:
 		return
 	for t in query_targets(origin.body_center(), 90.0):
-		if t != origin and randf() < chance and t.hit(power * 3.0, self, &"player", lift_time) == BaseTarget.HitResult.CAPTURED:
+		if t == origin or randf() >= chance:
+			continue
+		t.trajectory_changed = 1.0   # mitgerissen = veränderte Flugbahn
+		if t.hit(power * 3.0, self, &"player", lift_time) == BaseTarget.HitResult.CAPTURED:
 			add_beam(t, color)
 			GameManager.float_text(t.body_center(), "KETTE!", UIStyle.PINK, 16)
 			return

@@ -11,6 +11,50 @@
 [ext_resource type="Resource" path="res://data/targets/spy.tres" id="9_74hrx"]
 [ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="10_3d27d"]
 
+[ext_resource type="Script" path="res://data/region_data.gd" id="99_region"]
+
+[sub_resource type="Resource" id="Region_scrapyard"]
+script = ExtResource("99_region")
+id = &"scrapyard"
+display_name = "Schrottplatz"
+description = "Rostige Droiden suchen Ersatzteile."
+unlock_level = 1
+capacity = 0.7
+resupply = 0.8
+value_multiplier = 1.0
+weight_multipliers = {&"droid": 2.5, &"robot": 1.5, &"engineer": 0.6}
+transport = &"truck"
+transport_name = "Schrottlaster"
+map_goal = 120
+
+[sub_resource type="Resource" id="Region_factory"]
+script = ExtResource("99_region")
+id = &"factory"
+display_name = "Megafabrik"
+description = "Schichtwechsel! Ingenieure überall."
+unlock_level = 4
+capacity = 1.6
+resupply = 1.6
+value_multiplier = 0.85
+weight_multipliers = {&"engineer": 2.5, &"droid": 2.0, &"car": 2.0}
+transport = &"train"
+transport_name = "Fließband-Zug"
+map_goal = 250
+
+[sub_resource type="Resource" id="Region_server"]
+script = ExtResource("99_region")
+id = &"server"
+display_name = "Serverfarm"
+description = "Kühl, leise und voller Geheimnisse."
+unlock_level = 10
+capacity = 0.45
+resupply = 0.55
+value_multiplier = 2.5
+weight_multipliers = {&"spy": 4.0, &"robot": 3.0}
+transport = &"train"
+transport_name = "Datenzug"
+map_goal = 80
+
 [resource]
 script = ExtResource("3_o8my4")
 id = &"robot"
@@ -25,6 +69,7 @@ detail_color_2 = Color(0.95, 0.8, 0.3, 1)
 detail_style = &"metal"
 targets = Array[ExtResource("4_oy0si")]([ExtResource("5_t42u8"), ExtResource("6_bxh57"), ExtResource("7_tqep1"), ExtResource("8_mpl8a"), ExtResource("9_74hrx"), ExtResource("10_3d27d")])
 golden_target = ExtResource("1_m6lbk")
+regions = Array[ExtResource("99_region")]([SubResource("Region_scrapyard"), SubResource("Region_factory"), SubResource("Region_server")])
 credit_multiplier = 30.0
 target_hp_multiplier = 2.0
 rule_text = "Gepanzert: Alle Ziele haben doppelte HP."

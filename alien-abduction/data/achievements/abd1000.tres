@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("2_ybl4g")
 id = &"abd1000"
-display_name = "Massenware"
-description = "1.000 Entführungen."
+display_name = "Beam-Anfänger"
+description = "Sauge 1.000 Ziele ein."
 icon = ExtResource("1_2o045")
 stat = &"abductions"
 threshold = 1000.0

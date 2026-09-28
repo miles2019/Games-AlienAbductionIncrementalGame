@@ -97,6 +97,7 @@ func start_event(id: StringName) -> void:
 			_announce(id, "ENTFÜHRUNGSFEHLER!", Color(1, 0.7, 0.4))
 			_drop_mistake()
 		&"news":
+			GameManager._inc(&"news_events")
 			GameManager.news_requested.emit(HEADLINES.pick_random(), 20.0)
 			GameManager.start_buff(&"news", 20.0)
 			AudioManager.play(&"news")
@@ -142,6 +143,7 @@ func _drop_mistake() -> void:
 	if t == null:
 		return
 	t.bonus_mult = 10.0
+	t.from_mistake = true
 	t.frozen = 1.2
 	var start := land + Vector2(0, -500)
 	t.position = start

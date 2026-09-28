@@ -12,6 +12,7 @@ icon = ExtResource("1_20ldw")
 category = 1
 sort_order = 10
 base_cost = 40.0
+max_level = 4
 effect_stat = &"drone_count"
 effect_value = 1.0
 flavor = "Die erste Drohne! Sie heißt Kevin."

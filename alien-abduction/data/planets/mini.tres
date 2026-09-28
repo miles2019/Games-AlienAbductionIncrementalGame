@@ -14,6 +14,50 @@
 [ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="12_fhumt"]
 [ext_resource type="Resource" path="res://data/targets/robot.tres" id="13_uie8q"]
 
+[ext_resource type="Script" path="res://data/region_data.gd" id="99_region"]
+
+[sub_resource type="Resource" id="Region_minifarm"]
+script = ExtResource("99_region")
+id = &"minifarm"
+display_name = "Mini-Farm"
+description = "Winzige Kühe auf winzigen Weiden."
+unlock_level = 1
+capacity = 0.75
+resupply = 0.8
+value_multiplier = 1.0
+weight_multipliers = {&"cow": 3.0, &"dog": 1.5, &"human": 0.6}
+transport = &"truck"
+transport_name = "Spielzeuglaster"
+map_goal = 150
+
+[sub_resource type="Resource" id="Region_minicity"]
+script = ExtResource("99_region")
+id = &"minicity"
+display_name = "Mini-Metropole"
+description = "Tausende Winzlinge auf Modellstraßen."
+unlock_level = 4
+capacity = 1.6
+resupply = 1.6
+value_multiplier = 0.85
+weight_multipliers = {&"human": 2.5, &"car": 2.2, &"celebrity": 2.0}
+transport = &"train"
+transport_name = "Modelleisenbahn"
+map_goal = 300
+
+[sub_resource type="Resource" id="Region_museum"]
+script = ExtResource("99_region")
+id = &"museum"
+display_name = "Miniaturmuseum"
+description = "Wenige Besucher, aber sehr exklusive."
+unlock_level = 10
+capacity = 0.45
+resupply = 0.55
+value_multiplier = 2.5
+weight_multipliers = {&"spy": 4.0, &"robot": 3.0}
+transport = &"bus"
+transport_name = "Museumsbus"
+map_goal = 100
+
 [resource]
 script = ExtResource("3_ouog2")
 id = &"mini"
@@ -27,6 +71,7 @@ detail_color = Color(0.4, 0.63, 0.32, 1)
 detail_color_2 = Color(1, 0.9, 1, 1)
 targets = Array[ExtResource("4_ulmor")]([ExtResource("5_wqpsm"), ExtResource("6_knlsi"), ExtResource("7_uxcdf"), ExtResource("8_x4nbh"), ExtResource("9_pss1i"), ExtResource("10_acn03"), ExtResource("11_1jhrb"), ExtResource("12_fhumt"), ExtResource("13_uie8q")])
 golden_target = ExtResource("1_77wdi")
+regions = Array[ExtResource("99_region")]([SubResource("Region_minifarm"), SubResource("Region_minicity"), SubResource("Region_museum")])
 credit_multiplier = 300.0
 spawn_rate_multiplier = 3.0
 max_targets_multiplier = 3.0

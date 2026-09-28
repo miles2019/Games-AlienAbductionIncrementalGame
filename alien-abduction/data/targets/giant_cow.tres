@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_dv6rt")
 id = &"giant_cow"
+kind = 1
 display_name = "Riesenkuh"
 textures = Array[Texture2D]([ExtResource("3_5qil7")])
 pixel_scale = 7.0

@@ -10,6 +10,46 @@ const ICO := "res://assets/icons/"
 
 var _targets: Dictionary = {}
 
+## Zielart je Ziel (Standard: Mensch)
+const KINDS := {
+	"cow": 1, "dog": 1, "cat": 1, "bird": 1, "camel": 1, "penguin": 1, "giant_cow": 1, "golden_cow": 1, "gummy_cow": 1,
+	"car": 2, "jeep": 2, "candy_car": 2, "robot": 3, "droid": 3, "cactus_being": 4, "ice_crystal": 4,
+}
+
+## Regionen je Planet: [id, Name, Beschreibung, ab Level, Kapazität, Nachschub, Wert, Gewichte, Transport, Transportname, Kartografie-Ziel]
+const REGIONS := {
+	"earth": [
+		["village", "Dorf", "Ländlich und ruhig: viele Kühe, wenige Menschen.", 1, 0.75, 0.8, 1.0, {&"cow": 3.0, &"dog": 1.5, &"human": 0.6, &"car": 0.4}, &"truck", "Viehtransporter", 120],
+		["city", "Großstadt", "Dicht besiedelt: Menschenmassen, Autos und Prominente.", 4, 1.6, 1.6, 0.85, {&"human": 2.5, &"car": 2.2, &"celebrity": 2.0, &"cat": 1.5, &"cow": 0.15}, &"bus", "Linienbus", 250],
+		["area51", "Sperrgebiet", "Kaum jemand hier – aber jedes Ziel ist wertvoll.", 10, 0.45, 0.55, 2.5, {&"spy": 4.0, &"robot": 3.0, &"human": 0.5, &"cow": 0.3}, &"truck", "Militärlaster", 80],
+	],
+	"desert": [
+		["dunes", "Dünenmeer", "Endlose Dünen voller Kamele.", 1, 0.7, 0.8, 1.0, {&"camel": 3.0, &"cactus_being": 2.0, &"nomad": 0.7}, &"caravan", "Karawane", 120],
+		["bazaar", "Großer Basar", "Gedränge, Feilschen, Hupkonzerte.", 4, 1.6, 1.6, 0.85, {&"nomad": 2.5, &"car": 2.0, &"celebrity": 2.0, &"camel": 0.5}, &"bus", "Basar-Shuttle", 250],
+		["oasis", "Verborgene Oase", "Nur wenige finden hierher – dafür lohnt es sich.", 10, 0.45, 0.55, 2.5, {&"spy": 4.0, &"robot": 2.0, &"bird": 2.0}, &"caravan", "Karawane", 80],
+	],
+	"ice": [
+		["floe", "Eisscholle", "Pinguine, so weit das Auge reicht.", 1, 0.7, 0.8, 1.0, {&"penguin": 3.0, &"ice_crystal": 1.5, &"parka": 0.6}, &"truck", "Schneemobil-Konvoi", 120],
+		["station", "Forschungsstation", "Viele Forscher in dicken Jacken.", 4, 1.5, 1.5, 0.85, {&"parka": 2.5, &"car": 2.0, &"celebrity": 1.5, &"penguin": 0.5}, &"train", "Eisbahn", 250],
+		["glacier", "Gletscherspalte", "Eisig, einsam und voller seltener Funde.", 10, 0.45, 0.55, 2.5, {&"ice_crystal": 3.0, &"spy": 3.0, &"robot": 2.0}, &"truck", "Schneemobil-Konvoi", 80],
+	],
+	"robot": [
+		["scrapyard", "Schrottplatz", "Rostige Droiden suchen Ersatzteile.", 1, 0.7, 0.8, 1.0, {&"droid": 2.5, &"robot": 1.5, &"engineer": 0.6}, &"truck", "Schrottlaster", 120],
+		["factory", "Megafabrik", "Schichtwechsel! Ingenieure überall.", 4, 1.6, 1.6, 0.85, {&"engineer": 2.5, &"droid": 2.0, &"car": 2.0}, &"train", "Fließband-Zug", 250],
+		["server", "Serverfarm", "Kühl, leise und voller Geheimnisse.", 10, 0.45, 0.55, 2.5, {&"spy": 4.0, &"robot": 3.0}, &"train", "Datenzug", 80],
+	],
+	"candy": [
+		["fields", "Lollifelder", "Gummikühe grasen auf Zuckerwiesen.", 1, 0.7, 0.8, 1.0, {&"gummy_cow": 3.0, &"bird": 1.5, &"candy_person": 0.6}, &"truck", "Zuckerwatte-Laster", 120],
+		["town", "Zuckerstadt", "Ein süßes Gewusel aus Bonbon-Bewohnern.", 4, 1.6, 1.6, 0.85, {&"candy_person": 2.5, &"candy_car": 2.2, &"celebrity": 2.0}, &"bus", "Bonbon-Bus", 250],
+		["fountain", "Schokobrunnen", "Ein exklusiver Treffpunkt der Süßen und Schönen.", 10, 0.45, 0.55, 2.5, {&"spy": 4.0, &"celebrity": 3.0, &"cat": 2.0}, &"train", "Schoko-Express", 80],
+	],
+	"mini": [
+		["minifarm", "Mini-Farm", "Winzige Kühe auf winzigen Weiden.", 1, 0.75, 0.8, 1.0, {&"cow": 3.0, &"dog": 1.5, &"human": 0.6}, &"truck", "Spielzeuglaster", 150],
+		["minicity", "Mini-Metropole", "Tausende Winzlinge auf Modellstraßen.", 4, 1.6, 1.6, 0.85, {&"human": 2.5, &"car": 2.2, &"celebrity": 2.0}, &"train", "Modelleisenbahn", 300],
+		["museum", "Miniaturmuseum", "Wenige Besucher, aber sehr exklusive.", 10, 0.45, 0.55, 2.5, {&"spy": 4.0, &"robot": 3.0}, &"bus", "Museumsbus", 100],
+	],
+}
+
 
 func _ready() -> void:
 	print("targets..."); _build_targets()
@@ -36,6 +76,7 @@ func _save(res: Resource, path: String) -> void:
 func _target(id: String, props: Dictionary) -> TargetData:
 	var t := TargetData.new()
 	t.id = StringName(id)
+	t.kind = KINDS.get(id, TargetData.Kind.HUMAN)
 	print("  target ", id)
 	var texs: Array[Texture2D] = []
 	for p in props.get("textures", [id]):
@@ -151,6 +192,22 @@ func _planet(id: String, props: Dictionary, target_ids: Array) -> void:
 		arr.append(_targets[tid])
 	p.targets = arr
 	p.golden_target = _targets["golden_cow"]
+	var regions: Array[RegionData] = []
+	for r in REGIONS.get(id, []):
+		var reg := RegionData.new()
+		reg.id = StringName(r[0])
+		reg.display_name = r[1]
+		reg.description = r[2]
+		reg.unlock_level = r[3]
+		reg.capacity = r[4]
+		reg.resupply = r[5]
+		reg.value_multiplier = r[6]
+		reg.weight_multipliers = r[7]
+		reg.transport = r[8]
+		reg.transport_name = r[9]
+		reg.map_goal = r[10]
+		regions.append(reg)
+	p.regions = regions
 	_save(p, "res://data/planets/%s.tres" % id)
 
 
@@ -236,9 +293,9 @@ func _build_upgrades() -> void:
 	var FIX := UpgradeData.CostFormula.FIXED
 	# --- UFO
 	_up("power", C.UFO, {"display_name": "Saugkraft", "description": "+1 Saugkraft (Schaden pro Strahl) und +15 % Credits.", "icon": "power",
-		"base_cost": 10.0, "cost_scaling": 1.45, "effect": [&"click_power", ADD, 1.0], "effect2": [&"credit_mult", PCT, 0.15],
+		"base_cost": 10.0, "cost_scaling": 1.45, "max_level": 100, "effect": [&"click_power", ADD, 1.0], "effect2": [&"credit_mult", PCT, 0.15],
 		"flavor": "Mehr Saugkraft! Die Kühe werden es lieben. Oder fürchten."})
-	_up("range", C.UFO, {"display_name": "Saug-Reichweite", "description": "Größerer Fangradius.", "icon": "range",
+	_up("range", C.UFO, {"display_name": "Saug-Reichweite", "description": "Größerer Fangradius – schnelle und fliehende Ziele lassen sich leichter abfangen.", "icon": "range",
 		"base_cost": 20.0, "cost_scaling": 1.55, "max_level": 40, "effect": [&"capture_radius", ADD, 7.0]})
 	_up("speed", C.UFO, {"display_name": "UFO-Geschwindigkeit", "description": "UFO fliegt schneller, Strahl lädt 7 % schneller nach.", "icon": "speed",
 		"base_cost": 15.0, "cost_scaling": 1.5, "max_level": 30, "effect": [&"beam_cooldown", MUL, 0.93], "effect2": [&"ufo_speed", PCT, 0.1]})
@@ -259,15 +316,15 @@ func _build_upgrades() -> void:
 		"base_cost": 350.0, "cost_scaling": 1.7, "max_level": 20, "requirements": ["r_gadgets"], "effect": [&"energy_regen", PCT, 0.25]})
 	# --- Crew (Automatisierung)
 	_up("drone", C.CREW, {"display_name": "Mini-Drohne", "description": "Fliegt herum und saugt schwache Ziele automatisch ein.", "icon": "t_drone",
-		"base_cost": 40.0, "cost_scaling": 1.15, "effect": [&"drone_count", ADD, 1.0], "flavor": "Die erste Drohne! Sie heißt Kevin."})
+		"base_cost": 40.0, "cost_scaling": 1.15, "max_level": 4, "effect": [&"drone_count", ADD, 1.0], "flavor": "Die erste Drohne! Sie heißt Kevin."})
 	_up("patrol", C.CREW, {"display_name": "Patrouillen-UFO", "description": "5x Drohnen-Stärke, saugt bis zu 3 Ziele auf einmal.", "icon": "t_patrol",
-		"base_cost": 700.0, "cost_scaling": 1.16, "requirements": ["drone:5"], "effect": [&"patrol_count", ADD, 1.0],
+		"base_cost": 700.0, "cost_scaling": 1.16, "max_level": 2, "requirements": ["drone:4"], "effect": [&"patrol_count", ADD, 1.0],
 		"flavor": "Patrouille startklar. Sie hat sogar Blaulicht. Also, Rotlicht."})
 	_up("laser", C.CREW, {"display_name": "Laser-Satellit", "description": "Fegt regelmäßig einen Laser über das ganze Feld. Mehr Satelliten = öfter.", "icon": "laser",
-		"base_cost": 9000.0, "cost_scaling": 1.18, "requirements": ["patrol:3"], "effect": [&"laser_count", ADD, 1.0],
+		"base_cost": 9000.0, "cost_scaling": 1.18, "max_level": 5, "requirements": ["patrol:2"], "effect": [&"laser_count", ADD, 1.0],
 		"flavor": "Satellit im Orbit. Bitte nicht in den Laser schauen."})
 	_up("beiboot", C.CREW, {"display_name": "Mutterschiff-Beiboot", "description": "Saugt ganze Gruppen ein und lädt das Mutterschiff passiv auf.", "icon": "t_beiboot",
-		"base_cost": 120000.0, "cost_scaling": 1.2, "requirements": ["laser:2"], "effect": [&"beiboot_count", ADD, 1.0],
+		"base_cost": 120000.0, "cost_scaling": 1.2, "max_level": 1, "requirements": ["laser:2"], "effect": [&"beiboot_count", ADD, 1.0],
 		"effect2": [&"mothership_passive", ADD, 0.6]})
 	_up("crew_zorg", C.CREW_MEMBER, {"display_name": "Zorg, Pilot", "description": "Drohnen & Patrouillen fliegen 50 % schneller.", "icon": "crew_zorg",
 		"base_cost": 1500.0, "cost_formula": FIX, "max_level": 1, "requirements": ["drone:1"], "effect": [&"drone_speed", PCT, 0.5],
@@ -281,16 +338,16 @@ func _build_upgrades() -> void:
 	_up("crew_blib", C.CREW_MEMBER, {"display_name": "Blib, Technikerin", "description": "Laser-Satelliten doppelt so stark.", "icon": "crew_blib",
 		"base_cost": 20000.0, "cost_formula": FIX, "max_level": 1, "requirements": ["laser:1"], "effect": [&"laser_power", PCT, 1.0],
 		"flavor": "Ich hab den Laser getunt. Nicht reinschauen. Ernsthaft."})
-	_up("crew_quix", C.CREW_MEMBER, {"display_name": "Quix, Buchhalter", "description": "+10 % Credits und +25 % Offline-Einnahmen.", "icon": "crew_quix",
-		"base_cost": 60000.0, "cost_formula": FIX, "max_level": 1, "effect": [&"credit_mult", PCT, 0.1], "effect2": [&"offline_mult", PCT, 0.25],
+	_up("crew_quix", C.CREW_MEMBER, {"display_name": "Quix, Buchhalter", "description": "+10 % Credits und +25 % Alien-Daten.", "icon": "crew_quix",
+		"base_cost": 60000.0, "cost_formula": FIX, "max_level": 1, "effect": [&"credit_mult", PCT, 0.1], "effect2": [&"data_mult", PCT, 0.25],
 		"flavor": "Laut meinen Büchern schulden uns die Kühe noch was."})
 	# --- Bio-Labor
 	_up("bio_digest", C.BIOLAB, {"display_name": "Saugmagen", "description": "+10 % Credits.", "icon": "biomass", "currency": &"biomass",
-		"base_cost": 8.0, "cost_scaling": 1.5, "effect": [&"credit_mult", PCT, 0.1]})
+		"base_cost": 8.0, "cost_scaling": 1.5, "max_level": 50, "effect": [&"credit_mult", PCT, 0.1]})
 	_up("bio_tentacle", C.BIOLAB, {"display_name": "Drohnen-Tentakel", "description": "+1 Drohnen-Stärke, +5 % Drohnentempo.", "icon": "dna", "currency": &"biomass",
-		"base_cost": 20.0, "cost_scaling": 1.6, "effect": [&"drone_power", ADD, 1.0], "effect2": [&"drone_speed", PCT, 0.05]})
+		"base_cost": 20.0, "cost_scaling": 1.6, "max_level": 30, "effect": [&"drone_power", ADD, 1.0], "effect2": [&"drone_speed", PCT, 0.05]})
 	_up("bio_brain", C.BIOLAB, {"display_name": "Gehirnwellen", "description": "+15 % Erfahrung.", "icon": "eye", "currency": &"biomass",
-		"base_cost": 25.0, "cost_scaling": 1.55, "effect": [&"xp_mult", PCT, 0.15]})
+		"base_cost": 25.0, "cost_scaling": 1.55, "max_level": 30, "effect": [&"xp_mult", PCT, 0.15]})
 	_up("bio_metabolism", C.BIOLAB, {"display_name": "Hyper-Stoffwechsel", "description": "+12 % Mutterschiff-Ladung.", "icon": "charge", "currency": &"biomass",
 		"base_cost": 30.0, "cost_scaling": 1.6, "max_level": 25, "effect": [&"charge_mult", PCT, 0.12]})
 	_up("bio_mutagen", C.BIOLAB, {"display_name": "Gold-Mutagen", "description": "+15 % goldene Ziele.", "icon": "star", "currency": &"biomass",
@@ -310,7 +367,7 @@ func _build_upgrades() -> void:
 		["r_military", "Militärforschung", "Militär-Events: Jeeps schützen Ziele, sind aber selbst wertvoll.", "t_jeep", 30.0, ["r_events"], [&"unlock_military", UNL, 1.0]],
 		["r_deepscan", "Tiefenscan", "Doppelte Chance auf Alien-Daten.", "data", 35.0, ["r_spies"], [&"data_mult", PCT, 1.0]],
 		["r_robots", "Robotik", "Roboter tauchen auf: brauchen 5 Saugkraft, geben viel.", "t_robot", 40.0, ["r_cars"], []],
-		["r_autopilot", "Autopilot", "+4 h Offline-Zeit und +25 % Offline-Einnahmen.", "clock", 45.0, ["r_events"], [&"offline_hours", ADD, 4.0]],
+		["r_autopilot", "Autopilot", "Drohnen & Patrouillen fliegen 25 % schneller, das Mutterschiff lädt 10 % schneller.", "clock", 45.0, ["r_events"], [&"drone_speed", PCT, 0.25]],
 		["r_boss", "Kryptozoologie", "Event 'Riesiger Schatten': eine gigantische Kuh erscheint.", "t_giant_cow", 60.0, ["r_military"], [&"unlock_boss", UNL, 1.0]],
 		["r_mothership_ai", "Mutterschiff-KI", "Das Mutterschiff wird automatisch gerufen, sobald es bereit ist.", "t_beiboot", 80.0, ["r_boss"], [&"auto_mothership", UNL, 1.0]],
 	]
@@ -320,7 +377,7 @@ func _build_upgrades() -> void:
 		if not (r[6] as Array).is_empty():
 			props["effect"] = r[6]
 		if r[0] == "r_autopilot":
-			props["effect2"] = [&"offline_mult", PCT, 0.25]
+			props["effect2"] = [&"charge_mult", PCT, 0.1]
 		_up(r[0], C.RESEARCH, props)
 	# --- Skilltree (Skillpunkte, bleibt beim Prestige)
 	var S := {"currency": &"skill_points", "resets_on_prestige": false, "cost_formula": LIN, "base_cost": 1.0, "cost_scaling": 1.0}
@@ -335,9 +392,9 @@ func _build_upgrades() -> void:
 		["sk_physics", "Unfaire Physik", "10 % Chance pro Rang, dass ein Treffer benachbarte Ziele mitreißt.", "double", 0, Vector2(200, -370), 3, ["sk_turbo"], [&"chain_chance", ADD, 0.1], [], 0.0],
 		["sk_singularity", "Singularität", "x3 Schaden gegen Bosse und +50 % Saugkraft.", "charge", 0, Vector2(0, -520), 1, ["sk_critsuck"], [&"boss_damage", MUL, 3.0], [&"click_power", PCT, 0.5], 5.0],
 		# Tarnung
-		["sk_silent", "Leise Triebwerke", "Ziele erschrecken sich später (-20 % Schreck-Radius pro Rang).", "eye", 1, Vector2(140, 0), 3, ["sk_root"], [&"scare_radius", PCT, -0.2], [], 0.0],
+		["sk_silent", "Leise Triebwerke", "Ziele erschrecken sich später (-20 % Schreck-Radius) und fliehen 10 % langsamer (pro Rang).", "eye", 1, Vector2(140, 0), 3, ["sk_root"], [&"scare_radius", PCT, -0.2], [&"flee_speed", MUL, 0.9], 0.0],
 		["sk_fear", "Angst vor Aliens", "Ziele unter dem Fadenkreuz erstarren vor Angst.", "eye", 1, Vector2(255, -115), 1, ["sk_silent"], [&"freeze_under_ufo", UNL, 1.0], [], 2.0],
-		["sk_cloak", "Tarnkappe", "-1 % Fluchtchance pro Rang.", "lock", 1, Vector2(255, 115), 3, ["sk_silent"], [&"escape_chance", ADD, -0.01], [], 0.0],
+		["sk_cloak", "Tarnkappe", "-1 % Fluchtchance und +25 % Reaktionszeit, bevor seltene Ziele fliehen (pro Rang).", "lock", 1, Vector2(255, 115), 3, ["sk_silent"], [&"escape_chance", ADD, -0.01], [&"warn_time", PCT, 0.25], 0.0],
 		["sk_timewarp", "Zeitdehnung", "Ziele bewegen sich 10 % langsamer pro Rang.", "clock", 1, Vector2(390, -200), 3, ["sk_fear"], [&"target_speed", MUL, 0.9], [], 0.0],
 		["sk_radar", "Radar-Störer", "Militär-Schutzschilde 35 % kleiner pro Rang.", "t_jeep", 1, Vector2(405, 0), 2, ["sk_fear"], [&"shield_radius", PCT, -0.35], [], 0.0],
 		["sk_goldtiming", "Goldenes Timing", "Goldene Ziele bleiben 50 % länger und erscheinen 25 % häufiger (pro Rang).", "star", 1, Vector2(390, 200), 3, ["sk_cloak"], [&"golden_linger", PCT, 0.5], [&"golden_chance", PCT, 0.25], 0.0],
@@ -346,7 +403,7 @@ func _build_upgrades() -> void:
 		["sk_trade", "Intergalaktischer Handel", "+10 % Credits pro Rang.", "coin", 2, Vector2(0, 140), 10, ["sk_root"], [&"credit_mult", PCT, 0.1], [], 0.0],
 		["sk_goldrush", "Goldgräber", "+50 % Belohnung von goldenen Zielen pro Rang.", "star", 2, Vector2(-120, 250), 3, ["sk_trade"], [&"gold_reward", PCT, 0.5], [], 0.0],
 		["sk_combo", "Combo-Kunst", "+25 maximale Combo und längeres Combo-Fenster pro Rang.", "multi", 2, Vector2(120, 250), 3, ["sk_trade"], [&"combo_cap", ADD, 25.0], [&"combo_window", ADD, 0.3], 0.0],
-		["sk_sleep", "Schlafende Flotte", "+25 % Offline-Einnahmen und +2 h Offline-Zeit pro Rang.", "clock", 2, Vector2(-190, 370), 4, ["sk_goldrush"], [&"offline_mult", PCT, 0.25], [&"offline_hours", ADD, 2.0], 0.0],
+		["sk_sleep", "Wache Flotte", "+15 % Drohnen-Stärke und +10 % Drohnentempo pro Rang. Die Flotte arbeitet nur, solange das Spiel läuft.", "clock", 2, Vector2(-190, 370), 4, ["sk_goldrush"], [&"drone_power", PCT, 0.15], [&"drone_speed", PCT, 0.1], 0.0],
 		["sk_datatrade", "Datenhandel", "+50 % Alien-Daten pro Rang.", "data", 2, Vector2(40, 390), 3, ["sk_combo"], [&"data_mult", PCT, 0.5], [], 0.0],
 		["sk_cowmagnet", "Kuhmagnet", "Kühe erscheinen doppelt so oft, Biomasse x2.", "t_cow", 2, Vector2(200, 370), 1, ["sk_combo"], [&"biomass_mult", MUL, 2.0], [], 2.0],
 		["sk_compound", "Zinseszins", "Verdoppelt den Bonus aller Erfolge.", "trophy", 2, Vector2(0, 520), 1, ["sk_datatrade"], [], [], 5.0],
@@ -380,9 +437,9 @@ func _build_upgrades() -> void:
 		_up(s[0], C.SKILL, props)
 	# --- Ruf-Shop (Kosmischer Ruf, bleibt)
 	var ruf := [
-		["ruf_greed", "Kosmische Gier", "Credits x1.5 pro Stufe.", "ruf", 1.0, 2.0, 0, [&"credit_mult", MUL, 1.5], []],
+		["ruf_greed", "Kosmische Gier", "Credits x1.5 pro Stufe.", "ruf", 1.0, 2.0, 20, [&"credit_mult", MUL, 1.5], []],
 		["ruf_start", "Startkapital", "Starte jeden Planeten mit +2.000 Credits pro Stufe.", "coin", 1.0, 1.8, 10, [&"start_credits", ADD, 2000.0], []],
-		["ruf_veteran", "Veteranen-Drohnen", "Starte mit 5 Mini-Drohnen pro Stufe.", "t_drone", 2.0, 2.0, 10, [&"start_drones", ADD, 5.0], []],
+		["ruf_veteran", "Veteranen-Drohnen", "Starte jeden Planeten mit 1 Mini-Drohne pro Stufe.", "t_drone", 2.0, 2.0, 4, [&"start_drones", ADD, 1.0], []],
 		["ruf_warp", "Warp-Antrieb", "Strahl 10 % schneller, Drohnen 10 % schneller pro Stufe.", "speed", 1.0, 1.9, 10, [&"beam_cooldown", MUL, 0.9], [&"drone_speed", PCT, 0.1]],
 		["ruf_heritage", "Mutterschiff-Erbe", "+25 % Mutterschiff-Ladung pro Stufe.", "charge", 2.0, 2.0, 8, [&"charge_mult", PCT, 0.25], []],
 		["ruf_eternal", "Ewige Energie", "Energie-Aufladung x1.5 pro Stufe.", "energy", 2.0, 2.2, 5, [&"energy_regen", MUL, 1.5], []],
@@ -414,10 +471,10 @@ func _build_upgrades() -> void:
 
 func _build_achievements() -> void:
 	var list := [
-		["first", "Hallo, Erdling!", "Entführe dein erstes Ziel.", &"abductions", 1.0, "t_human_0", false],
+		["first", "Erster Kontakt", "Entführe dein erstes Ziel.", &"abductions", 1.0, "t_human_0", false],
 		["cow1", "Keiner hat die Kuh kommen sehen", "Entführe eine Kuh.", &"abducted_cow", 1.0, "t_cow", false],
 		["click100", "Kleine Hände, großer Sauger", "Klicke 100 Mal.", &"clicks", 100.0, "power", false],
-		["abd1000", "Massenware", "1.000 Entführungen.", &"abductions", 1000.0, "multi", false],
+		["abd1000", "Beam-Anfänger", "Sauge 1.000 Ziele ein.", &"abductions", 1000.0, "multi", false],
 		["abd10k", "Menschheit fast erledigt", "10.000 Entführungen.", &"abductions", 10000.0, "multi", false],
 		["abd100k", "Wer macht das Licht aus?", "100.000 Entführungen.", &"abductions", 100000.0, "multi", false],
 		["gold1", "Glänzender Fund", "Entführe ein goldenes Ziel.", &"golden", 1.0, "t_golden_cow", false],
@@ -431,13 +488,13 @@ func _build_achievements() -> void:
 		["cred1b", "Kosmischer Milliardär", "Verdiene insgesamt 1 Milliarde Credits.", &"credits_total", 1.0e9, "coin", false],
 		["cred1t", "Galaktischer Großinvestor", "Verdiene insgesamt 1 Billion Credits.", &"credits_total", 1.0e12, "coin", false],
 		["drone1", "Kleine Helfer", "Kaufe eine Mini-Drohne.", &"drones", 1.0, "t_drone", false],
-		["drone25", "Schwarmintelligenz", "Besitze 25 Mini-Drohnen.", &"drones", 25.0, "t_drone", false],
-		["crew100", "Armada", "Besitze 100 Flotten-Einheiten.", &"crew_total", 100.0, "t_patrol", false],
+		["drone25", "Schwarmintelligenz", "Besitze die maximale Anzahl Mini-Drohnen (4).", &"drones", 4.0, "t_drone", false],
+		["crew100", "Armada", "Stelle die komplette Flotte auf (12 Einheiten).", &"crew_total", 12.0, "t_patrol", false],
 		["mother1", "Mama ist da", "Rufe das Mutterschiff.", &"mothership_calls", 1.0, "t_beiboot", false],
 		["mother10", "Stammgast", "Rufe das Mutterschiff 10 Mal.", &"mothership_calls", 10.0, "t_beiboot", false],
 		["prestige1", "Planetenraub", "Stiehl deinen ersten Planeten.", &"prestiges", 1.0, "planet_earth", false],
-		["prestige5", "Planetensammler", "Stiehl 5 Planeten.", &"prestiges", 5.0, "planet_mini", false],
-		["escape1", "Das war nicht geplant", "Ein Ziel entkommt im letzten Moment.", &"escapes", 1.0, "t_human_0", false],
+		["prestige5", "Serientäter", "Stiehl 5 Planeten.", &"prestiges", 5.0, "planet_mini", false],
+		["escape1", "Rutschige Hände", "Ein Ziel entkommt im letzten Moment.", &"escapes", 1.0, "t_human_0", false],
 		["level10", "Aufsteiger", "Erreiche Level 10.", &"level", 10.0, "skillpoint", false],
 		["level25", "Kommandant", "Erreiche Level 25.", &"level", 25.0, "skillpoint", false],
 		["skills10", "Verzweigt", "Investiere 10 Skillpunkte.", &"skill_ranks", 10.0, "skillpoint", false],
@@ -445,16 +502,39 @@ func _build_achievements() -> void:
 		["dog10", "Wer ist ein guter Junge?", "Entführe 10 Hunde.", &"abducted_dog", 10.0, "t_dog", false],
 		["bird50", "Vogelfrei", "Entführe 50 Vögel.", &"abducted_bird", 50.0, "t_bird", false],
 		["car1", "Führerschein entzogen", "Entführe ein Auto.", &"abducted_car", 1.0, "t_car_0", false],
-		["spy1", "Enttarnt", "Entführe einen Alien-Spion.", &"abducted_spy", 1.0, "t_spy", false],
+		["spy1", "Falscher Alarm", "Enttarne einen Alien-Spion.", &"abducted_spy", 1.0, "t_spy", false],
 		["celeb1", "Autogramm bitte!", "Entführe einen Prominenten.", &"abducted_celebrity", 1.0, "t_celebrity", false],
 		["robot1", "Blechschaden", "Entführe einen Roboter.", &"abducted_robot", 1.0, "t_robot", false],
 		["boss1", "Riesiger Schatten", "Entführe eine Riesenkuh.", &"boss_kills", 1.0, "t_giant_cow", false],
 		["crit100", "Kritische Masse", "100 kritische Entführungen.", &"crits", 100.0, "crit", false],
 		["gadget10", "Knöpfchendrücker", "Benutze 10 Gadgets.", &"gadgets_used", 10.0, "charge", false],
 		["events10", "Chaos-Magnet", "Erlebe 10 Zufallsereignisse.", &"events", 10.0, "clock", false],
-		["offline1", "Schlafwandler", "Sammle Offline-Einnahmen ein.", &"offline_collected", 1.0, "clock", false],
+		["offline1", "Willkommen zurück", "Kehre nach einer Pause zu deiner Crew zurück.", &"returns", 1.0, "clock", false],
 		["misses100", "Daneben ist auch vorbei", "Verfehle 100 Mal.", &"misses", 100.0, "lock", true],
 		["sun1", "Bitte nicht die Sonne", "Du hast es tatsächlich getan.", &"sun_events", 1.0, "solar", true],
+		# [.., Belohnungs-Kosmetik, Crew-Spruch]
+		["panic50", "Massenpanik", "Entführe 50 Ziele innerhalb von 30 Sekunden.", &"best_30s", 50.0, "multi", false, &"skin_neon", "Neon-Lack aufgetragen! Jetzt sieht uns wirklich jeder."],
+		["clean40", "Keine Pause", "Halte eine 40er-Combo ohne einen einzigen Fehlschuss.", &"best_clean_combo", 40.0, "crit", false, &"skin_ghost", "Kein Fehlschuss? Ich hab dir ein Geister-UFO lackiert."],
+		["sweep1", "Leer gefegt", "Entführe alle gerade sichtbaren Ziele.", &"field_cleared", 1.0, "range", false, &"beam_void", "Leer. Komplett leer. Hier, ein Strahl in Leere-Violett."],
+		["stats10k", "Die Statistik lügt nicht", "Entführe 10.000 Menschen und 10.000 Tiere.", &"humans_and_animals", 10000.0, "trophy", false, &"", "Quix hat nachgezählt. Zweimal. Stimmt alles."],
+		["goldlast", "Goldene Gelegenheit", "Erwische ein goldenes Ziel im letzten Moment.", &"gold_last_moment", 1.0, "t_golden_cow", true, &"beam_sparkle", "In letzter Sekunde! Der Strahl glitzert jetzt vor Stolz."],
+		["cowcombo20", "Kuhmagnet bestätigt", "Entführe 20 Kühe in einer einzigen Combo.", &"best_cow_combo", 20.0, "t_cow", true, &"beam_milk", "Zwanzig Kühe! Der Strahl riecht jetzt nach Milch."],
+		["robotpoke", "Bitte nicht anfassen", "Klicke einen Roboter an, obwohl der Strahl zu schwach ist.", &"robot_deflects", 1.0, "t_robot", true, &"", "KLONK. Der Roboter hat sich beschwert. Schriftlich."],
+		["dodge1", "Fliegender Wechsel", "Erwische ein Ziel mitten in einer Ausweichbewegung.", &"dodge_catches", 1.0, "speed", false, &"", "Haken geschlagen – und trotzdem erwischt!"],
+		["close1", "Das war knapp", "Entführe ein Ziel weniger als eine Sekunde vor seiner Flucht.", &"close_calls", 1.0, "clock", false, &"", "Eine Sekunde später und es wäre weg gewesen!"],
+		["news5", "Breaking News", "Löse fünf Breaking-News-Ereignisse aus.", &"news_events", 5.0, "eye", false, &"skin_news", "Wir sind Dauergast im Fernsehen. Hier, ein Übertragungswagen-Lack."],
+		["newscow", "Kuh im Bild", "Entführe eine Kuh während einer Breaking-News-Sendung.", &"news_cows", 1.0, "t_cow", true, &"", "Live im Fernsehen! Die Kuh hat gewunken."],
+		["convoy1", "Militärisches Missverständnis", "Sauge einen geschützten Militär-Konvoi ein.", &"abducted_jeep", 1.0, "t_jeep", true, &"", "Wir haben einen Jeep. Weiß jemand, wie man den fährt?"],
+		["vacation1", "Urlaub auf der Erde", "Lass das Helfer-UFO während seines Besuchs mindestens 12 Ziele einsaugen.", &"vacation_full", 1.0, "star", true, &"", "Der Urlauber schreibt uns eine Postkarte: 'Beste Reise ever.'"],
+		["physics1", "Unfaire Physik", "Entführe ein Ziel, dessen Flugbahn gerade verändert wurde.", &"physics_catches", 1.0, "double", true, &"", "Newton würde weinen."],
+		["mistake1", "Das war nicht geplant", "Sauge ein Ziel nach einem Entführungsfehler erneut ein.", &"mistake_catches", 1.0, "t_human_0", true, &"", "Zurück an Bord. Diesmal mit Anschnallgurt."],
+		["species1", "Vollständige Speziesliste", "Entdecke jeden Zieltyp eines Planeten.", &"species_complete", 1.0, "research", false, &"beam_dna", "Katalog komplett! Der Strahl schimmert jetzt in DNA-Lila."],
+		["mapper1", "Kartograf", "Kartografiere alle Regionen eines Planeten vollständig.", &"planets_mapped", 1.0, "planet_earth", false, &"skin_map", "Karte fertig! Das UFO bekommt einen Tarnlack im Kartenlook."],
+		["skins10", "UFO-Fan", "Schalte zehn verschiedene UFO-Skins frei.", &"skins_owned", 10.0, "skin_disco", false, &"", "Zehn Skins. Der Hangar ist jetzt offiziell ein Modehaus."],
+		["crewboss", "Crew-Chef", "Heuere auf einem Planeten alle Crew-Mitglieder an.", &"crew_members", 5.0, "crew_zorg", false, &"", "Die ganze Crew an Bord! Wer kocht heute?"],
+		["energymax", "Viel zu viel Energie", "Zünde eine Überladung mit komplett gefülltem Energiespeicher.", &"overload_full", 1.0, "battery", true, &"", "Voller Speicher, volle Überladung. Die Sicherungen glühen."],
+		["sunskin", "Sonnenbrand", "Erlebe das geheime Sonnen-Event dreimal.", &"sun_events", 3.0, "solar", true, &"skin_sun", "Wir haben die Sonne angefasst. Das UFO ist jetzt... orange."],
+		["planetall", "Planetensammler", "Führe auf jedem Planeten mindestens einen Planetenraub durch.", &"planets_prestiged", 6.0, "planet_mini", false, &"", "Jeder Planet einmal eingepackt. Die Sammlung ist komplett!"],
 	]
 	var i := 0
 	for a in list:
@@ -468,5 +548,8 @@ func _build_achievements() -> void:
 		ach.secret = a[6]
 		ach.bonus = 0.03 if a[6] else 0.02
 		ach.sort_order = i
+		if a.size() > 7:
+			ach.reward_cosmetic = a[7]
+			ach.reward_line = a[8]
 		i += 1
 		_save(ach, "res://data/achievements/%s.tres" % a[0])
