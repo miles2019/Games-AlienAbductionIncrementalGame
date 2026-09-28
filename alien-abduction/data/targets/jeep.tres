@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/car_target.tscn" id="1_hec3c"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_u6oct"]
+[ext_resource type="Texture2D" path="res://assets/sprites/jeep.png" id="3_gof05"]
+
+[resource]
+script = ExtResource("2_u6oct")
+id = &"jeep"
+display_name = "Militär-Jeep"
+textures = Array[Texture2D]([ExtResource("3_gof05")])
+shadow_width = 32.0
+scene = ExtResource("1_hec3c")
+base_hp = 12.0
+weight = 2.5
+credits = 40.0
+xp = 8.0
+mothership_charge = 3.0
+min_power = 3.0
+escape_chance = 0.0
+movement = 1
+speed_min = 50.0
+speed_max = 70.0
+spawn_weight = 0.0
+reaction = 3
+sound = &"honk"
+abduct_lines = Array[String](["Wir haben einen Jeep der Armee. Das gibt Ärger. Oder Punkte!"])

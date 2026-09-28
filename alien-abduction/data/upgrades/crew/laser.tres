@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/laser.png" id="1_5pskm"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_crqdh"]
+
+[resource]
+script = ExtResource("2_crqdh")
+id = &"laser"
+display_name = "Laser-Satellit"
+description = "Fegt regelmäßig einen Laser über das ganze Feld. Mehr Satelliten = öfter."
+icon = ExtResource("1_5pskm")
+category = 1
+sort_order = 12
+base_cost = 9000.0
+cost_scaling = 1.18
+effect_stat = &"laser_count"
+effect_value = 1.0
+requirements = Array[String](["patrol:3"])
+flavor = "Satellit im Orbit. Bitte nicht in den Laser schauen."

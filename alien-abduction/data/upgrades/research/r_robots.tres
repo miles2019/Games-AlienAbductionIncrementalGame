@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_robot.png" id="1_hppnl"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_gglxv"]
+
+[resource]
+script = ExtResource("2_gglxv")
+id = &"r_robots"
+display_name = "Robotik"
+description = "Roboter tauchen auf: brauchen 5 Saugkraft, geben viel."
+icon = ExtResource("1_hppnl")
+category = 4
+sort_order = 35
+currency = &"data"
+cost_formula = 4
+base_cost = 40.0
+max_level = 1
+requirements = Array[String](["r_cars"])
+resets_on_prestige = false

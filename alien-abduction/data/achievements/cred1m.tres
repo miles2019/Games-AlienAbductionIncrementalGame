@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/coin.png" id="1_vcwuc"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_tkohx"]
+
+[resource]
+script = ExtResource("2_tkohx")
+id = &"cred1m"
+display_name = "Millionär aus dem All"
+description = "Verdiene insgesamt 1 Million Credits."
+icon = ExtResource("1_vcwuc")
+stat = &"credits_total"
+threshold = 1000000.0
+sort_order = 13

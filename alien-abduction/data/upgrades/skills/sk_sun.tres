@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/solar.png" id="1_dtpb2"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_lag53"]
+
+[resource]
+script = ExtResource("2_lag53")
+id = &"sk_sun"
+display_name = "Bitte nicht die Sonne"
+description = "Schaltet ein geheimes Ereignis frei. Was kann schon schiefgehen?"
+icon = ExtResource("1_dtpb2")
+category = 5
+sort_order = 67
+currency = &"skill_points"
+cost_formula = 4
+base_cost = 3.0
+cost_scaling = 1.0
+max_level = 1
+effect_stat = &"sun_event"
+effect_mode = 3
+effect_value = 1.0
+requirements = Array[String](["sk_overcharge"])
+resets_on_prestige = false
+secret = true
+branch = 3
+tree_position = Vector2(-530, 0)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_beiboot.png" id="1_lwvxt"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_6358x"]
+
+[resource]
+script = ExtResource("2_6358x")
+id = &"mother10"
+display_name = "Stammgast"
+description = "Rufe das Mutterschiff 10 Mal."
+icon = ExtResource("1_lwvxt")
+stat = &"mothership_calls"
+threshold = 10.0
+sort_order = 20

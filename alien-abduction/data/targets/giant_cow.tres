@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/boss_target.tscn" id="1_ovhaf"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_dv6rt"]
+[ext_resource type="Texture2D" path="res://assets/sprites/giant_cow.png" id="3_5qil7"]
+
+[resource]
+script = ExtResource("2_dv6rt")
+id = &"giant_cow"
+display_name = "Riesenkuh"
+textures = Array[Texture2D]([ExtResource("3_5qil7")])
+pixel_scale = 7.0
+shadow_width = 70.0
+scene = ExtResource("1_ovhaf")
+base_hp = 200.0
+weight = 4.0
+credits = 2500.0
+biomass = 250.0
+alien_data = 10.0
+xp = 100.0
+mothership_charge = 30.0
+escape_chance = 0.0
+speed_min = 10.0
+speed_max = 14.0
+spawn_weight = 0.0
+is_boss = true
+reaction = 2
+sound = &"moo"
+reaction_lines = Array[String](["MUUUUUH!", "Ich bin größer als euer Schiff!", "Probiert's doch!"])

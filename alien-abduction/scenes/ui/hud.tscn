@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_h"]
+[ext_resource type="Script" path="res://scenes/ui/top_bar.gd" id="2_tb"]
+[ext_resource type="PackedScene" path="res://scenes/ui/shop_panel.tscn" id="3_sp"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mothership_bar.tscn" id="4_mb"]
+[ext_resource type="PackedScene" path="res://scenes/ui/skill_tree_panel.tscn" id="5_st"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlay_panel.tscn" id="6_op"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_h")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MothershipBar" parent="Root" instance=ExtResource("4_mb")]
+layout_mode = 0
+
+[node name="ShopPanel" parent="Root" instance=ExtResource("3_sp")]
+layout_mode = 1
+
+[node name="TopBar" type="PanelContainer" parent="Root"]
+layout_mode = 1
+script = ExtResource("2_tb")
+
+[node name="SkillTreePanel" parent="Root" instance=ExtResource("5_st")]
+layout_mode = 1
+
+[node name="OverlayPanel" parent="Root" instance=ExtResource("6_op")]
+layout_mode = 1

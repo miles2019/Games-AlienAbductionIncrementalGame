@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crit.png" id="1_jbii5"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_01lpr"]
+
+[resource]
+script = ExtResource("2_01lpr")
+id = &"combo25"
+display_name = "Combo-Künstler"
+description = "Erreiche eine 25er-Combo."
+icon = ExtResource("1_jbii5")
+stat = &"best_combo"
+threshold = 25.0
+sort_order = 9

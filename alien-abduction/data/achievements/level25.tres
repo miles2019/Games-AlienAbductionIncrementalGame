@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/skillpoint.png" id="1_h8e47"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_0mhdt"]
+
+[resource]
+script = ExtResource("2_0mhdt")
+id = &"level25"
+display_name = "Kommandant"
+description = "Erreiche Level 25."
+icon = ExtResource("1_h8e47")
+stat = &"level"
+threshold = 25.0
+sort_order = 25

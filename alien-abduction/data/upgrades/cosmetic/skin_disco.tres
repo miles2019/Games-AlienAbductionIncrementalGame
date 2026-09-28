@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/skin_disco.png" id="1_8fip2"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_qr03g"]
+
+[resource]
+script = ExtResource("2_qr03g")
+id = &"skin_disco"
+display_name = "UFO: Disco-Kugel"
+description = "Samstagabend im Orbit."
+icon = ExtResource("1_8fip2")
+category = 7
+sort_order = 78
+cost_formula = 4
+base_cost = 15000.0
+max_level = 1
+resets_on_prestige = false

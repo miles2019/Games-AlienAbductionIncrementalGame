@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/clock.png" id="1_j8rut"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_jwvfc"]
+
+[resource]
+script = ExtResource("2_jwvfc")
+id = &"r_events"
+display_name = "Chaostheorie"
+description = "Zufallsereignisse: Kuh-Parade, Goldrausch, Breaking News, Alien-Urlauber ..."
+icon = ExtResource("1_j8rut")
+category = 4
+sort_order = 28
+currency = &"data"
+cost_formula = 4
+base_cost = 6.0
+max_level = 1
+effect_stat = &"unlock_events"
+effect_mode = 3
+effect_value = 1.0
+resets_on_prestige = false

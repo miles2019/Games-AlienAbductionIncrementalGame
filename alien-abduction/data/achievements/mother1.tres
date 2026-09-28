@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_beiboot.png" id="1_oettr"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_q2pc7"]
+
+[resource]
+script = ExtResource("2_q2pc7")
+id = &"mother1"
+display_name = "Mama ist da"
+description = "Rufe das Mutterschiff."
+icon = ExtResource("1_oettr")
+stat = &"mothership_calls"
+sort_order = 19

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/charge.png" id="1_23h48"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_dgnsn"]
+
+[resource]
+script = ExtResource("2_dgnsn")
+id = &"sk_charge"
+display_name = "Schnell-Ladung"
+description = "+15 % Mutterschiff-Ladung pro Rang."
+icon = ExtResource("1_23h48")
+category = 5
+sort_order = 61
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 5
+effect_stat = &"charge_mult"
+effect_mode = 1
+effect_value = 0.15
+requirements = Array[String](["sk_root"])
+resets_on_prestige = false
+branch = 3
+tree_position = Vector2(-140, 0)

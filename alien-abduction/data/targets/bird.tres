@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/bird_target.tscn" id="1_eiuio"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_0gijx"]
+[ext_resource type="Texture2D" path="res://assets/sprites/bird.png" id="3_tqteb"]
+
+[resource]
+script = ExtResource("2_0gijx")
+id = &"bird"
+display_name = "Vogel"
+textures = Array[Texture2D]([ExtResource("3_tqteb")])
+pixel_scale = 2.5
+shadow_width = 8.0
+fly_height = 60.0
+scene = ExtResource("1_eiuio")
+credits = 1.5
+biomass = 0.5
+mothership_charge = 0.5
+escape_chance = 0.06
+movement = 2
+speed_min = 110.0
+speed_max = 130.0
+group_size = 5
+spawn_weight = 5.0
+required_upgrade = &"r_birds"
+reaction = 5
+sound = &"tweet"
+abduct_lines = Array[String](["Ein Vogel. Er hat sich einfach mitziehen lassen."])

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/human_target.tscn" id="1_c8aga"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_2m35c"]
+[ext_resource type="Texture2D" path="res://assets/sprites/celebrity.png" id="3_exetm"]
+
+[resource]
+script = ExtResource("2_2m35c")
+id = &"celebrity"
+display_name = "Prominenter"
+textures = Array[Texture2D]([ExtResource("3_exetm")])
+scene = ExtResource("1_c8aga")
+base_hp = 3.0
+credits = 150.0
+alien_data = 2.0
+xp = 15.0
+mothership_charge = 8.0
+speed_min = 50.0
+speed_max = 70.0
+lifetime = 16.0
+spawn_weight = 0.9
+required_upgrade = &"r_celebs"
+is_rare = true
+reaction_lines = Array[String](["Keine Fotos!", "Wissen Sie, wer ich bin?!", "Mein Agent hört davon!"])
+abduct_lines = Array[String](["Ein Promi! Autogramm bitte!"])

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/lure.png" id="1_y65t0"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_wxhrk"]
+
+[resource]
+script = ExtResource("2_wxhrk")
+id = &"lure"
+display_name = "Lockstoff"
+description = "+2 max. Ziele auf dem Feld, +8 % Spawnrate."
+icon = ExtResource("1_y65t0")
+sort_order = 5
+base_cost = 60.0
+cost_scaling = 1.6
+max_level = 30
+effect_stat = &"max_targets"
+effect_value = 2.0
+effect2_stat = &"spawn_rate"
+effect2_value = 0.08

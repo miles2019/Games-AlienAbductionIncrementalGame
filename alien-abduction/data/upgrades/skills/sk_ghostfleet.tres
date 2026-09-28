@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_drone.png" id="1_starm"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_1ofjj"]
+
+[resource]
+script = ExtResource("2_1ofjj")
+id = &"sk_ghostfleet"
+display_name = "Unsichtbare Flotte"
+description = "+20 % Drohnentempo und +25 % Drohnen-Stärke pro Rang."
+icon = ExtResource("1_starm")
+category = 5
+sort_order = 53
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 3
+effect_stat = &"drone_speed"
+effect_mode = 1
+effect_value = 0.2
+effect2_stat = &"drone_power"
+effect2_value = 0.25
+requirements = Array[String](["sk_radar"])
+resets_on_prestige = false
+branch = 1
+tree_position = Vector2(530, 0)

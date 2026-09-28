@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/energy.png" id="1_3d08e"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_4jgxy"]
+
+[resource]
+script = ExtResource("2_4jgxy")
+id = &"ruf_eternal"
+display_name = "Ewige Energie"
+description = "Energie-Aufladung x1.5 pro Stufe."
+icon = ExtResource("1_3d08e")
+category = 6
+sort_order = 73
+currency = &"ruf"
+base_cost = 2.0
+cost_scaling = 2.2
+max_level = 5
+effect_stat = &"energy_regen"
+effect_mode = 2
+effect_value = 1.5
+resets_on_prestige = false

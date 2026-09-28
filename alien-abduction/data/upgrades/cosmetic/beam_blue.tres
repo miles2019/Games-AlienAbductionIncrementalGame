@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/beam_blue.png" id="1_r5q0x"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_cfvhb"]
+
+[resource]
+script = ExtResource("2_cfvhb")
+id = &"beam_blue"
+display_name = "Strahl: Eisblau"
+description = "Kühl. Sehr kühl."
+icon = ExtResource("1_r5q0x")
+category = 7
+sort_order = 77
+cost_formula = 4
+base_cost = 4000.0
+max_level = 1
+resets_on_prestige = false

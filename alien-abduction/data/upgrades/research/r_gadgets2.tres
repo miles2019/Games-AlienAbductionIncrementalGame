@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/double.png" id="1_voa18"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_hfbx6"]
+
+[resource]
+script = ExtResource("2_hfbx6")
+id = &"r_gadgets2"
+display_name = "Gadget-Werkstatt II"
+description = "Zielverdopplung & Sofortaufladung (Tasten 4-5)."
+icon = ExtResource("1_voa18")
+category = 4
+sort_order = 31
+currency = &"data"
+cost_formula = 4
+base_cost = 20.0
+max_level = 1
+effect_stat = &"unlock_gadgets2"
+effect_mode = 3
+effect_value = 1.0
+requirements = Array[String](["r_gadgets"])
+resets_on_prestige = false

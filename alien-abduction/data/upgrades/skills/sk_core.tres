@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/battery.png" id="1_ygswd"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_n80sp"]
+
+[resource]
+script = ExtResource("2_n80sp")
+id = &"sk_core"
+display_name = "Energiekern"
+description = "+25 maximale Energie pro Rang."
+icon = ExtResource("1_ygswd")
+category = 5
+sort_order = 64
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 3
+effect_stat = &"energy_max"
+effect_value = 25.0
+requirements = Array[String](["sk_massbeam"])
+resets_on_prestige = false
+branch = 3
+tree_position = Vector2(-390, -200)

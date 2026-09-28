@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/planet_earth.png" id="1_h24hr"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_kvm2u"]
+
+[resource]
+script = ExtResource("2_kvm2u")
+id = &"prestige1"
+display_name = "Planetenraub"
+description = "Stiehl deinen ersten Planeten."
+icon = ExtResource("1_h24hr")
+stat = &"prestiges"
+sort_order = 21

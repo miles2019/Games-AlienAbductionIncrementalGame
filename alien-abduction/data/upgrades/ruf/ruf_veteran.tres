@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_drone.png" id="1_fuwkg"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_qku61"]
+
+[resource]
+script = ExtResource("2_qku61")
+id = &"ruf_veteran"
+display_name = "Veteranen-Drohnen"
+description = "Starte mit 5 Mini-Drohnen pro Stufe."
+icon = ExtResource("1_fuwkg")
+category = 6
+sort_order = 70
+currency = &"ruf"
+base_cost = 2.0
+cost_scaling = 2.0
+max_level = 10
+effect_stat = &"start_drones"
+effect_value = 5.0
+resets_on_prestige = false

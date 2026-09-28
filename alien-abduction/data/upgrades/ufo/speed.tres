@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/speed.png" id="1_dd8id"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_oeqb4"]
+
+[resource]
+script = ExtResource("2_oeqb4")
+id = &"speed"
+display_name = "UFO-Geschwindigkeit"
+description = "UFO fliegt schneller, Strahl lädt 7 % schneller nach."
+icon = ExtResource("1_dd8id")
+sort_order = 2
+base_cost = 15.0
+cost_scaling = 1.5
+max_level = 30
+effect_stat = &"beam_cooldown"
+effect_mode = 2
+effect_value = 0.93
+effect2_stat = &"ufo_speed"
+effect2_value = 0.1

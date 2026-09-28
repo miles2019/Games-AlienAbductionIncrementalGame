@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/eye.png" id="1_88l4p"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_vf1j1"]
+
+[resource]
+script = ExtResource("2_vf1j1")
+id = &"sk_fear"
+display_name = "Angst vor Aliens"
+description = "Ziele unter dem Fadenkreuz erstarren vor Angst."
+icon = ExtResource("1_88l4p")
+category = 5
+sort_order = 48
+currency = &"skill_points"
+cost_formula = 4
+base_cost = 2.0
+cost_scaling = 1.0
+max_level = 1
+effect_stat = &"freeze_under_ufo"
+effect_mode = 3
+effect_value = 1.0
+requirements = Array[String](["sk_silent"])
+resets_on_prestige = false
+branch = 1
+tree_position = Vector2(255, -115)

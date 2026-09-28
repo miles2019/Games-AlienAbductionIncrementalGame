@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_cow.png" id="1_4nmax"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_v4xjr"]
+
+[resource]
+script = ExtResource("2_v4xjr")
+id = &"cow1"
+display_name = "Keiner hat die Kuh kommen sehen"
+description = "Entführe eine Kuh."
+icon = ExtResource("1_4nmax")
+stat = &"abducted_cow"
+sort_order = 1

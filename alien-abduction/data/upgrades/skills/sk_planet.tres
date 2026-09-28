@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/planet_earth.png" id="1_ndog4"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_7gg50"]
+
+[resource]
+script = ExtResource("2_7gg50")
+id = &"sk_planet"
+display_name = "Planetenkenner"
+description = "+15 % Kosmischer Ruf pro Rang."
+icon = ExtResource("1_ndog4")
+category = 5
+sort_order = 66
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 3
+effect_stat = &"ruf_mult"
+effect_mode = 1
+effect_value = 0.15
+requirements = Array[String](["sk_wave"])
+resets_on_prestige = false
+branch = 3
+tree_position = Vector2(-390, 200)

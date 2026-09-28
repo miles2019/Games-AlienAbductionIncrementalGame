@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/eye.png" id="1_cldq8"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_v1mtv"]
+
+[resource]
+script = ExtResource("2_v1mtv")
+id = &"sk_silent"
+display_name = "Leise Triebwerke"
+description = "Ziele erschrecken sich später (-20 % Schreck-Radius pro Rang)."
+icon = ExtResource("1_cldq8")
+category = 5
+sort_order = 47
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 3
+effect_stat = &"scare_radius"
+effect_mode = 1
+effect_value = -0.2
+requirements = Array[String](["sk_root"])
+resets_on_prestige = false
+branch = 1
+tree_position = Vector2(140, 0)

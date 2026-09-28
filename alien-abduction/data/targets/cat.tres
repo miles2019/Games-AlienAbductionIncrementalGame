@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="Script" path="res://data/target_data.gd" id="1_iwwlx"]
+[ext_resource type="Texture2D" path="res://assets/sprites/cat.png" id="2_qouxc"]
+
+[resource]
+script = ExtResource("1_iwwlx")
+id = &"cat"
+display_name = "Katze"
+textures = Array[Texture2D]([ExtResource("2_qouxc")])
+pixel_scale = 2.6
+credits = 2.5
+biomass = 1.0
+data_chance = 0.04
+xp = 1.5
+speed_max = 90.0
+spawn_weight = 8.0
+required_upgrade = &"r_pets"
+reaction = 5
+sound = &"meow"
+abduct_lines = Array[String](["Die Katze schaut uns an, als wären WIR die Entführten."])

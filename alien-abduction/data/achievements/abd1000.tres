@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/multi.png" id="1_2o045"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_ybl4g"]
+
+[resource]
+script = ExtResource("2_ybl4g")
+id = &"abd1000"
+display_name = "Massenware"
+description = "1.000 Entführungen."
+icon = ExtResource("1_2o045")
+stat = &"abductions"
+threshold = 1000.0
+sort_order = 3

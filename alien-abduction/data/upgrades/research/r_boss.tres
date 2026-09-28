@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_giant_cow.png" id="1_b01pg"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_jcjcr"]
+
+[resource]
+script = ExtResource("2_jcjcr")
+id = &"r_boss"
+display_name = "Kryptozoologie"
+description = "Event 'Riesiger Schatten': eine gigantische Kuh erscheint."
+icon = ExtResource("1_b01pg")
+category = 4
+sort_order = 37
+currency = &"data"
+cost_formula = 4
+base_cost = 60.0
+max_level = 1
+effect_stat = &"unlock_boss"
+effect_mode = 3
+effect_value = 1.0
+requirements = Array[String](["r_military"])
+resets_on_prestige = false

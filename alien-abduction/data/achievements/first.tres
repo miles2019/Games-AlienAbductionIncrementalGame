@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_human_0.png" id="1_yrkli"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_j8qrx"]
+
+[resource]
+script = ExtResource("2_j8qrx")
+id = &"first"
+display_name = "Hallo, Erdling!"
+description = "Entführe dein erstes Ziel."
+icon = ExtResource("1_yrkli")
+stat = &"abductions"

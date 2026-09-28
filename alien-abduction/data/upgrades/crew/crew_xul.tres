@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crew_xul.png" id="1_m77ri"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_bevy4"]
+
+[resource]
+script = ExtResource("2_bevy4")
+id = &"crew_xul"
+display_name = "Mama Xul, Köchin"
+description = "+50 % Biomasse."
+icon = ExtResource("1_m77ri")
+category = 2
+sort_order = 16
+cost_formula = 4
+base_cost = 6000.0
+max_level = 1
+effect_stat = &"biomass_mult"
+effect_mode = 1
+effect_value = 0.5
+flavor = "Biomasse? Ich nenne das Zutaten, Schätzchen."

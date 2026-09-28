@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/human_target.tscn" id="1_miqoe"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_rqj0x"]
+[ext_resource type="Texture2D" path="res://assets/sprites/candy_0.png" id="3_y80e5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/candy_1.png" id="4_wj20f"]
+
+[resource]
+script = ExtResource("2_rqj0x")
+id = &"candy_person"
+display_name = "Zuckerwesen"
+textures = Array[Texture2D]([ExtResource("3_y80e5"), ExtResource("4_wj20f")])
+scene = ExtResource("1_miqoe")
+credits = 1.5
+speed_max = 55.0
+spawn_weight = 50.0
+reaction_lines = Array[String](["Iiiih, klebrig!", "Nicht abschlecken!"])

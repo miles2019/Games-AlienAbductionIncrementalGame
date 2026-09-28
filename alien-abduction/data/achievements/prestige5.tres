@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/planet_mini.png" id="1_7wr1l"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_3y7fm"]
+
+[resource]
+script = ExtResource("2_3y7fm")
+id = &"prestige5"
+display_name = "Planetensammler"
+description = "Stiehl 5 Planeten."
+icon = ExtResource("1_7wr1l")
+stat = &"prestiges"
+threshold = 5.0
+sort_order = 22

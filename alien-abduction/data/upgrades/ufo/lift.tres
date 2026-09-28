@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/beam.png" id="1_7wgp7"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_8elxw"]
+
+[resource]
+script = ExtResource("2_8elxw")
+id = &"lift"
+display_name = "Saug-Turbo"
+description = "Ziele werden 12 % schneller eingesaugt."
+icon = ExtResource("1_7wgp7")
+sort_order = 3
+base_cost = 30.0
+cost_scaling = 1.5
+max_level = 25
+effect_stat = &"lift_speed"
+effect_mode = 1
+effect_value = 0.12

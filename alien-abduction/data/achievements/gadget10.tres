@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/charge.png" id="1_3euom"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_712mu"]
+
+[resource]
+script = ExtResource("2_712mu")
+id = &"gadget10"
+display_name = "Knöpfchendrücker"
+description = "Benutze 10 Gadgets."
+icon = ExtResource("1_3euom")
+stat = &"gadgets_used"
+threshold = 10.0
+sort_order = 36

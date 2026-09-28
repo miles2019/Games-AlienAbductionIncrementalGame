@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ufo/mothership.gd" id="1_m"]
+[ext_resource type="Texture2D" path="res://assets/sprites/mothership.png" id="2_t"]
+[ext_resource type="Script" path="res://scenes/effects/mass_beam_overlay.gd" id="3_o"]
+
+[node name="Mothership" type="Node2D"]
+script = ExtResource("1_m")
+
+[node name="MassBeamOverlay" type="Node2D" parent="."]
+script = ExtResource("3_o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(6, 6)
+texture = ExtResource("2_t")
+
+[node name="Anchor" type="Marker2D" parent="."]
+position = Vector2(0, 90)

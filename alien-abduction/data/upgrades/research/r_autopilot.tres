@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/clock.png" id="1_12d48"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_hac75"]
+
+[resource]
+script = ExtResource("2_hac75")
+id = &"r_autopilot"
+display_name = "Autopilot"
+description = "+4 h Offline-Zeit und +25 % Offline-Einnahmen."
+icon = ExtResource("1_12d48")
+category = 4
+sort_order = 36
+currency = &"data"
+cost_formula = 4
+base_cost = 45.0
+max_level = 1
+effect_stat = &"offline_hours"
+effect_value = 4.0
+effect2_stat = &"offline_mult"
+effect2_value = 0.25
+requirements = Array[String](["r_events"])
+resets_on_prestige = false

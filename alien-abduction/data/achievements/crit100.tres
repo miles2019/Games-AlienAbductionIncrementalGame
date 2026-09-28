@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crit.png" id="1_w7upg"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_vbf1d"]
+
+[resource]
+script = ExtResource("2_vbf1d")
+id = &"crit100"
+display_name = "Kritische Masse"
+description = "100 kritische Entführungen."
+icon = ExtResource("1_w7upg")
+stat = &"crits"
+threshold = 100.0
+sort_order = 35

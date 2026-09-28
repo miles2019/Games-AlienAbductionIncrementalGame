@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_spy.png" id="1_4nwne"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_raic1"]
+
+[resource]
+script = ExtResource("2_raic1")
+id = &"spy1"
+display_name = "Enttarnt"
+description = "Entführe einen Alien-Spion."
+icon = ExtResource("1_4nwne")
+stat = &"abducted_spy"
+sort_order = 31

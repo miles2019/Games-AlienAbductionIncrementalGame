@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/cow_target.tscn" id="1_e408x"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_ik4jc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/cow.png" id="3_d3u2l"]
+
+[resource]
+script = ExtResource("2_ik4jc")
+id = &"cow"
+display_name = "Kuh"
+textures = Array[Texture2D]([ExtResource("3_d3u2l")])
+shadow_width = 22.0
+scene = ExtResource("1_e408x")
+base_hp = 2.0
+weight = 1.8
+credits = 3.0
+biomass = 2.0
+xp = 2.0
+mothership_charge = 2.0
+speed_min = 12.0
+speed_max = 24.0
+spawn_weight = 30.0
+reaction = 2
+sound = &"moo"
+reaction_lines = Array[String](["Muh?", "MUH!", "...muh.", "Muuuh!"])
+abduct_lines = Array[String](["Keiner hat die Kuh kommen sehen!"])

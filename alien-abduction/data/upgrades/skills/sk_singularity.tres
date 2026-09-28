@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/charge.png" id="1_mxaqk"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_p6rkj"]
+
+[resource]
+script = ExtResource("2_p6rkj")
+id = &"sk_singularity"
+display_name = "Singularität"
+description = "x3 Schaden gegen Bosse und +50 % Saugkraft."
+icon = ExtResource("1_mxaqk")
+category = 5
+sort_order = 46
+currency = &"skill_points"
+cost_formula = 4
+base_cost = 5.0
+cost_scaling = 1.0
+max_level = 1
+effect_stat = &"boss_damage"
+effect_mode = 2
+effect_value = 3.0
+effect2_stat = &"click_power"
+effect2_value = 0.5
+requirements = Array[String](["sk_critsuck"])
+resets_on_prestige = false
+tree_position = Vector2(0, -520)

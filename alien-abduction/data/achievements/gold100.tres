@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_golden_cow.png" id="1_h1fb1"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_jdxe6"]
+
+[resource]
+script = ExtResource("2_jdxe6")
+id = &"gold100"
+display_name = "Midas-Touch"
+description = "Entführe 100 goldene Ziele."
+icon = ExtResource("1_h1fb1")
+stat = &"golden"
+threshold = 100.0
+sort_order = 8

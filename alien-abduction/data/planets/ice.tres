@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="PlanetData" format=3]
+
+[ext_resource type="Resource" path="res://data/targets/golden_cow.tres" id="1_i76yf"]
+[ext_resource type="Texture2D" path="res://assets/icons/planet_ice.png" id="2_e7bi4"]
+[ext_resource type="Script" path="res://data/planet_data.gd" id="3_5wfyl"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="4_rr76k"]
+[ext_resource type="Resource" path="res://data/targets/parka.tres" id="5_2jqbh"]
+[ext_resource type="Resource" path="res://data/targets/penguin.tres" id="6_x3fn8"]
+[ext_resource type="Resource" path="res://data/targets/ice_crystal.tres" id="7_nu6aw"]
+[ext_resource type="Resource" path="res://data/targets/dog.tres" id="8_rjet6"]
+[ext_resource type="Resource" path="res://data/targets/car.tres" id="9_5vyix"]
+[ext_resource type="Resource" path="res://data/targets/spy.tres" id="10_fkqfu"]
+[ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="11_aa8df"]
+[ext_resource type="Resource" path="res://data/targets/robot.tres" id="12_uh3lb"]
+
+[resource]
+script = ExtResource("3_5wfyl")
+id = &"ice"
+display_name = "Eisplanet"
+description = "Glatt, kalt, voller Pinguine."
+icon = ExtResource("2_e7bi4")
+order = 2
+ground_color = Color(0.9, 0.95, 1, 1)
+ground_color_2 = Color(0.83, 0.9, 0.98, 1)
+detail_color = Color(0.62, 0.8, 0.95, 1)
+detail_style = &"snow"
+targets = Array[ExtResource("4_rr76k")]([ExtResource("5_2jqbh"), ExtResource("6_x3fn8"), ExtResource("7_nu6aw"), ExtResource("8_rjet6"), ExtResource("9_5vyix"), ExtResource("10_fkqfu"), ExtResource("11_aa8df"), ExtResource("12_uh3lb")])
+golden_target = ExtResource("1_i76yf")
+credit_multiplier = 10.0
+slippery = true
+rule_text = "Glatteis: Ziele rutschen unkontrolliert."

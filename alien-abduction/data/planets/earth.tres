@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="PlanetData" format=3]
+
+[ext_resource type="Resource" path="res://data/targets/golden_cow.tres" id="1_csuga"]
+[ext_resource type="Texture2D" path="res://assets/icons/planet_earth.png" id="2_8n2d7"]
+[ext_resource type="Script" path="res://data/planet_data.gd" id="3_57776"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="4_7lbku"]
+[ext_resource type="Resource" path="res://data/targets/human.tres" id="5_viy64"]
+[ext_resource type="Resource" path="res://data/targets/cow.tres" id="6_000b5"]
+[ext_resource type="Resource" path="res://data/targets/dog.tres" id="7_m8bcj"]
+[ext_resource type="Resource" path="res://data/targets/cat.tres" id="8_wbry5"]
+[ext_resource type="Resource" path="res://data/targets/bird.tres" id="9_8rpad"]
+[ext_resource type="Resource" path="res://data/targets/car.tres" id="10_q2gmq"]
+[ext_resource type="Resource" path="res://data/targets/spy.tres" id="11_5or8h"]
+[ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="12_44lc2"]
+[ext_resource type="Resource" path="res://data/targets/robot.tres" id="13_24o24"]
+
+[resource]
+script = ExtResource("3_57776")
+id = &"earth"
+display_name = "Erde"
+description = "Ein blauer Planet voller ahnungsloser Menschen und Kühe."
+icon = ExtResource("2_8n2d7")
+ground_color = Color(0.47, 0.73, 0.35, 1)
+ground_color_2 = Color(0.42, 0.67, 0.3, 1)
+detail_color = Color(0.33, 0.57, 0.25, 1)
+targets = Array[ExtResource("4_7lbku")]([ExtResource("5_viy64"), ExtResource("6_000b5"), ExtResource("7_m8bcj"), ExtResource("8_wbry5"), ExtResource("9_8rpad"), ExtResource("10_q2gmq"), ExtResource("11_5or8h"), ExtResource("12_44lc2"), ExtResource("13_24o24")])
+golden_target = ExtResource("1_csuga")
+rule_text = "Klassisch: Menschen, Kühe & Co."

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_dog.png" id="1_i3et2"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_g7kg6"]
+
+[resource]
+script = ExtResource("2_g7kg6")
+id = &"dog10"
+display_name = "Wer ist ein guter Junge?"
+description = "Entführe 10 Hunde."
+icon = ExtResource("1_i3et2")
+stat = &"abducted_dog"
+threshold = 10.0
+sort_order = 28

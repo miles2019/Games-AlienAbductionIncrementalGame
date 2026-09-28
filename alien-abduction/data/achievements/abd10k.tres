@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/multi.png" id="1_uvjop"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_eywq1"]
+
+[resource]
+script = ExtResource("2_eywq1")
+id = &"abd10k"
+display_name = "Menschheit fast erledigt"
+description = "10.000 Entführungen."
+icon = ExtResource("1_uvjop")
+stat = &"abductions"
+threshold = 10000.0
+sort_order = 4

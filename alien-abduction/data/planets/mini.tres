@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="PlanetData" format=3]
+
+[ext_resource type="Resource" path="res://data/targets/golden_cow.tres" id="1_77wdi"]
+[ext_resource type="Texture2D" path="res://assets/icons/planet_mini.png" id="2_k440v"]
+[ext_resource type="Script" path="res://data/planet_data.gd" id="3_ouog2"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="4_ulmor"]
+[ext_resource type="Resource" path="res://data/targets/human.tres" id="5_wqpsm"]
+[ext_resource type="Resource" path="res://data/targets/cow.tres" id="6_knlsi"]
+[ext_resource type="Resource" path="res://data/targets/dog.tres" id="7_uxcdf"]
+[ext_resource type="Resource" path="res://data/targets/cat.tres" id="8_x4nbh"]
+[ext_resource type="Resource" path="res://data/targets/bird.tres" id="9_pss1i"]
+[ext_resource type="Resource" path="res://data/targets/car.tres" id="10_acn03"]
+[ext_resource type="Resource" path="res://data/targets/spy.tres" id="11_1jhrb"]
+[ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="12_fhumt"]
+[ext_resource type="Resource" path="res://data/targets/robot.tres" id="13_uie8q"]
+
+[resource]
+script = ExtResource("3_ouog2")
+id = &"mini"
+display_name = "Miniaturplanet"
+description = "Alles ist winzig – aber es gibt Unmengen davon."
+icon = ExtResource("2_k440v")
+order = 5
+ground_color = Color(0.55, 0.8, 0.45, 1)
+ground_color_2 = Color(0.5, 0.75, 0.4, 1)
+detail_color = Color(0.4, 0.63, 0.32, 1)
+detail_color_2 = Color(1, 0.9, 1, 1)
+targets = Array[ExtResource("4_ulmor")]([ExtResource("5_wqpsm"), ExtResource("6_knlsi"), ExtResource("7_uxcdf"), ExtResource("8_x4nbh"), ExtResource("9_pss1i"), ExtResource("10_acn03"), ExtResource("11_1jhrb"), ExtResource("12_fhumt"), ExtResource("13_uie8q")])
+golden_target = ExtResource("1_77wdi")
+credit_multiplier = 300.0
+spawn_rate_multiplier = 3.0
+max_targets_multiplier = 3.0
+target_scale = 0.55
+rule_text = "Winzig: 3x so viele Ziele, alle klein."

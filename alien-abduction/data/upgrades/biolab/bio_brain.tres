@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/eye.png" id="1_i481u"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_kyet1"]
+
+[resource]
+script = ExtResource("2_kyet1")
+id = &"bio_brain"
+display_name = "Gehirnwellen"
+description = "+15 % Erfahrung."
+icon = ExtResource("1_i481u")
+category = 3
+sort_order = 21
+currency = &"biomass"
+base_cost = 25.0
+cost_scaling = 1.55
+effect_stat = &"xp_mult"
+effect_mode = 1
+effect_value = 0.15

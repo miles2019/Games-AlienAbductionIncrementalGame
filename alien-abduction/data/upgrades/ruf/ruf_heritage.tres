@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/charge.png" id="1_p222r"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_b85sn"]
+
+[resource]
+script = ExtResource("2_b85sn")
+id = &"ruf_heritage"
+display_name = "Mutterschiff-Erbe"
+description = "+25 % Mutterschiff-Ladung pro Stufe."
+icon = ExtResource("1_p222r")
+category = 6
+sort_order = 72
+currency = &"ruf"
+base_cost = 2.0
+cost_scaling = 2.0
+max_level = 8
+effect_stat = &"charge_mult"
+effect_mode = 1
+effect_value = 0.25
+resets_on_prestige = false

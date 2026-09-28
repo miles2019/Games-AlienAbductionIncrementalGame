@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/beam_pink.png" id="1_tksux"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_paf6n"]
+
+[resource]
+script = ExtResource("2_paf6n")
+id = &"beam_pink"
+display_name = "Strahl: Pink"
+description = "Für stilvolle Entführungen."
+icon = ExtResource("1_tksux")
+category = 7
+sort_order = 76
+cost_formula = 4
+base_cost = 4000.0
+max_level = 1
+resets_on_prestige = false

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/star.png" id="1_th258"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_hxxtq"]
+
+[resource]
+script = ExtResource("2_hxxtq")
+id = &"sk_goldtiming"
+display_name = "Goldenes Timing"
+description = "Goldene Ziele bleiben 50 % länger und erscheinen 25 % häufiger (pro Rang)."
+icon = ExtResource("1_th258")
+category = 5
+sort_order = 52
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 3
+effect_stat = &"golden_linger"
+effect_mode = 1
+effect_value = 0.5
+effect2_stat = &"golden_chance"
+effect2_value = 0.25
+requirements = Array[String](["sk_cloak"])
+resets_on_prestige = false
+branch = 1
+tree_position = Vector2(390, 200)

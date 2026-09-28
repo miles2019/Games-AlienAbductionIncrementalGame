@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crew_glorp.png" id="1_v0ll0"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_vnxm4"]
+
+[resource]
+script = ExtResource("2_vnxm4")
+id = &"crew_glorp"
+display_name = "Glorp, Kommentator"
+description = "Seltene & goldene Ziele erscheinen 50 % häufiger. Kommentiert alles."
+icon = ExtResource("1_v0ll0")
+category = 2
+sort_order = 15
+cost_formula = 4
+base_cost = 4000.0
+max_level = 1
+effect_stat = &"rare_mult"
+effect_mode = 1
+effect_value = 0.5
+effect2_stat = &"golden_chance"
+effect2_value = 0.5
+flavor = "GLORP IST AUF SENDUNG! Was für ein Tag für Entführungen!"

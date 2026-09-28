@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/human_target.tscn" id="1_c3qrm"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_ld6gw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/nomad_0.png" id="3_8s1m0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/nomad_1.png" id="4_emc4f"]
+
+[resource]
+script = ExtResource("2_ld6gw")
+id = &"nomad"
+display_name = "Wüstenhändler"
+textures = Array[Texture2D]([ExtResource("3_8s1m0"), ExtResource("4_emc4f")])
+scene = ExtResource("1_c3qrm")
+credits = 1.5
+speed_min = 35.0
+spawn_weight = 50.0
+reaction_lines = Array[String](["Sand in den Augen!", "Meine Ware!", "Kein Rabatt für Aliens!"])

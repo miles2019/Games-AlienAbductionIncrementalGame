@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/biomass.png" id="1_vk4xh"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_6rds2"]
+
+[resource]
+script = ExtResource("2_6rds2")
+id = &"bio_digest"
+display_name = "Saugmagen"
+description = "+10 % Credits."
+icon = ExtResource("1_vk4xh")
+category = 3
+sort_order = 19
+currency = &"biomass"
+base_cost = 8.0
+cost_scaling = 1.5
+effect_stat = &"credit_mult"
+effect_mode = 1
+effect_value = 0.1

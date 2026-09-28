@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="PlanetData" format=3]
+
+[ext_resource type="Resource" path="res://data/targets/golden_cow.tres" id="1_m6lbk"]
+[ext_resource type="Texture2D" path="res://assets/icons/planet_robot.png" id="2_tjbvu"]
+[ext_resource type="Script" path="res://data/planet_data.gd" id="3_o8my4"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="4_oy0si"]
+[ext_resource type="Resource" path="res://data/targets/engineer.tres" id="5_t42u8"]
+[ext_resource type="Resource" path="res://data/targets/droid.tres" id="6_bxh57"]
+[ext_resource type="Resource" path="res://data/targets/robot.tres" id="7_tqep1"]
+[ext_resource type="Resource" path="res://data/targets/car.tres" id="8_mpl8a"]
+[ext_resource type="Resource" path="res://data/targets/spy.tres" id="9_74hrx"]
+[ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="10_3d27d"]
+
+[resource]
+script = ExtResource("3_o8my4")
+id = &"robot"
+display_name = "Roboterplanet"
+description = "Fabriken, Droiden und Sicherheitsprotokolle."
+icon = ExtResource("2_tjbvu")
+order = 3
+ground_color = Color(0.42, 0.45, 0.52, 1)
+ground_color_2 = Color(0.38, 0.41, 0.48, 1)
+detail_color = Color(0.32, 0.34, 0.4, 1)
+detail_color_2 = Color(0.95, 0.8, 0.3, 1)
+detail_style = &"metal"
+targets = Array[ExtResource("4_oy0si")]([ExtResource("5_t42u8"), ExtResource("6_bxh57"), ExtResource("7_tqep1"), ExtResource("8_mpl8a"), ExtResource("9_74hrx"), ExtResource("10_3d27d")])
+golden_target = ExtResource("1_m6lbk")
+credit_multiplier = 30.0
+target_hp_multiplier = 2.0
+rule_text = "Gepanzert: Alle Ziele haben doppelte HP."

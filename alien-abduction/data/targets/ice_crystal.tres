@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="Script" path="res://data/target_data.gd" id="1_6kl36"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ice_crystal.png" id="2_7i50i"]
+
+[resource]
+script = ExtResource("1_6kl36")
+id = &"ice_crystal"
+display_name = "Eiskristall"
+textures = Array[Texture2D]([ExtResource("2_7i50i")])
+base_hp = 5.0
+weight = 1.5
+credits = 12.0
+data_chance = 0.15
+xp = 4.0
+escape_chance = 0.0
+movement = 3
+lifetime = 22.0
+spawn_weight = 5.0
+reaction = 0
+sound = &"coin"

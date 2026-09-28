@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_car_0.png" id="1_7mjhx"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_opg0v"]
+
+[resource]
+script = ExtResource("2_opg0v")
+id = &"r_cars"
+display_name = "Fahrzeugtechnik"
+description = "Autos: schwer einzusaugen, aber wertvoll."
+icon = ExtResource("1_7mjhx")
+category = 4
+sort_order = 29
+currency = &"data"
+cost_formula = 4
+max_level = 1
+requirements = Array[String](["r_pets"])
+resets_on_prestige = false

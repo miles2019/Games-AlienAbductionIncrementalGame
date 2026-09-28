@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/solar.png" id="1_fpxs0"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_v8syp"]
+
+[resource]
+script = ExtResource("2_v8syp")
+id = &"sun1"
+display_name = "Bitte nicht die Sonne"
+description = "Du hast es tatsächlich getan."
+icon = ExtResource("1_fpxs0")
+stat = &"sun_events"
+bonus = 0.03
+secret = true
+sort_order = 40

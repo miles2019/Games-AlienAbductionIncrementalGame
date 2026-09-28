@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/speed.png" id="1_2tat1"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_wk3vd"]
+
+[resource]
+script = ExtResource("2_wk3vd")
+id = &"ruf_warp"
+display_name = "Warp-Antrieb"
+description = "Strahl 10 % schneller, Drohnen 10 % schneller pro Stufe."
+icon = ExtResource("1_2tat1")
+category = 6
+sort_order = 71
+currency = &"ruf"
+base_cost = 1.0
+cost_scaling = 1.9
+max_level = 10
+effect_stat = &"beam_cooldown"
+effect_mode = 2
+effect_value = 0.9
+effect2_stat = &"drone_speed"
+effect2_value = 0.1
+resets_on_prestige = false

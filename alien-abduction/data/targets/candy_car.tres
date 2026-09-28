@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/car_target.tscn" id="1_6aeiv"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_43i76"]
+[ext_resource type="Texture2D" path="res://assets/sprites/candy_car.png" id="3_00sjf"]
+
+[resource]
+script = ExtResource("2_43i76")
+id = &"candy_car"
+display_name = "Bonbon-Auto"
+textures = Array[Texture2D]([ExtResource("3_00sjf")])
+shadow_width = 32.0
+scene = ExtResource("1_6aeiv")
+base_hp = 5.0
+weight = 2.2
+credits = 14.0
+xp = 5.0
+mothership_charge = 4.0
+escape_chance = 0.0
+movement = 1
+speed_min = 70.0
+speed_max = 110.0
+spawn_weight = 7.0
+reaction = 3
+sound = &"honk"

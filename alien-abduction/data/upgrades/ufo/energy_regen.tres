@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/solar.png" id="1_juyuk"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_1nhbj"]
+
+[resource]
+script = ExtResource("2_1nhbj")
+id = &"energy_regen"
+display_name = "Solarsegel"
+description = "+25 % Energie-Aufladung."
+icon = ExtResource("1_juyuk")
+sort_order = 9
+base_cost = 350.0
+cost_scaling = 1.7
+max_level = 20
+effect_stat = &"energy_regen"
+effect_mode = 1
+effect_value = 0.25
+requirements = Array[String](["r_gadgets"])

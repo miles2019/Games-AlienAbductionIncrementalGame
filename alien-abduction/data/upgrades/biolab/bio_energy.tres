@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/energy.png" id="1_0vjko"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_0lxp2"]
+
+[resource]
+script = ExtResource("2_0lxp2")
+id = &"bio_energy"
+display_name = "Energie-Symbiont"
+description = "+20 % Energie-Aufladung."
+icon = ExtResource("1_0vjko")
+category = 3
+sort_order = 24
+currency = &"biomass"
+base_cost = 50.0
+cost_scaling = 1.7
+max_level = 20
+effect_stat = &"energy_regen"
+effect_mode = 1
+effect_value = 0.2
+requirements = Array[String](["r_gadgets"])

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/targets/base_target.gd" id="1_bt"]
+
+[node name="BaseTarget" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_bt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

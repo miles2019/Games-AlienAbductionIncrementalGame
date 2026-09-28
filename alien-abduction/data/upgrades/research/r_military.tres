@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_jeep.png" id="1_xw5je"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_5ovw6"]
+
+[resource]
+script = ExtResource("2_5ovw6")
+id = &"r_military"
+display_name = "Militärforschung"
+description = "Militär-Events: Jeeps schützen Ziele, sind aber selbst wertvoll."
+icon = ExtResource("1_xw5je")
+category = 4
+sort_order = 33
+currency = &"data"
+cost_formula = 4
+base_cost = 30.0
+max_level = 1
+effect_stat = &"unlock_military"
+effect_mode = 3
+effect_value = 1.0
+requirements = Array[String](["r_events"])
+resets_on_prestige = false

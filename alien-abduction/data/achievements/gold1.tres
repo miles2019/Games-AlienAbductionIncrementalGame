@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_golden_cow.png" id="1_tuvfn"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_8s04k"]
+
+[resource]
+script = ExtResource("2_8s04k")
+id = &"gold1"
+display_name = "Glänzender Fund"
+description = "Entführe ein goldenes Ziel."
+icon = ExtResource("1_tuvfn")
+stat = &"golden"
+sort_order = 6

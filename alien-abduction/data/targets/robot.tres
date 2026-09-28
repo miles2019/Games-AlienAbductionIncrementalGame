@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="Script" path="res://data/target_data.gd" id="1_y5kog"]
+[ext_resource type="Texture2D" path="res://assets/sprites/robot.png" id="2_386h2"]
+
+[resource]
+script = ExtResource("1_y5kog")
+id = &"robot"
+display_name = "Roboter"
+textures = Array[Texture2D]([ExtResource("2_386h2")])
+base_hp = 25.0
+weight = 2.2
+credits = 80.0
+alien_data = 2.0
+xp = 20.0
+mothership_charge = 6.0
+min_power = 5.0
+escape_chance = 0.0
+speed_min = 20.0
+speed_max = 35.0
+spawn_weight = 2.5
+required_upgrade = &"r_robots"
+reaction = 4
+sound = &"clank"
+abduct_lines = Array[String](["Ein Roboter! Blib will ihn sofort aufschrauben."])

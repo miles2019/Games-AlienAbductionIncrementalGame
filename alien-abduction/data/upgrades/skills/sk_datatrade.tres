@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/data.png" id="1_unvn2"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_34lna"]
+
+[resource]
+script = ExtResource("2_34lna")
+id = &"sk_datatrade"
+display_name = "Datenhandel"
+description = "+50 % Alien-Daten pro Rang."
+icon = ExtResource("1_unvn2")
+category = 5
+sort_order = 58
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 3
+effect_stat = &"data_mult"
+effect_mode = 1
+effect_value = 0.5
+requirements = Array[String](["sk_combo"])
+resets_on_prestige = false
+branch = 2
+tree_position = Vector2(40, 390)

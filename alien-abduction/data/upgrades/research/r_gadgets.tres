@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/charge.png" id="1_pq3et"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_eqs14"]
+
+[resource]
+script = ExtResource("2_eqs14")
+id = &"r_gadgets"
+display_name = "Gadget-Werkstatt"
+description = "Energie & Gadgets: Überladung, Zeitlupe, Goldrausch (Tasten 1-3)."
+icon = ExtResource("1_pq3et")
+category = 4
+sort_order = 26
+currency = &"data"
+cost_formula = 4
+base_cost = 3.0
+max_level = 1
+effect_stat = &"unlock_gadgets"
+effect_mode = 3
+effect_value = 1.0
+resets_on_prestige = false

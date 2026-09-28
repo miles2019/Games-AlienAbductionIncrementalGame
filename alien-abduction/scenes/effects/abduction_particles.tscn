@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/effects/abduction_particles.gd" id="1_p"]
+
+[node name="AbductionParticles" type="CPUParticles2D"]
+emitting = false
+one_shot = true
+script = ExtResource("1_p")

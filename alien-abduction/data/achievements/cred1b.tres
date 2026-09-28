@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/coin.png" id="1_mvo1i"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_qgdlb"]
+
+[resource]
+script = ExtResource("2_qgdlb")
+id = &"cred1b"
+display_name = "Kosmischer Milliardär"
+description = "Verdiene insgesamt 1 Milliarde Credits."
+icon = ExtResource("1_mvo1i")
+stat = &"credits_total"
+threshold = 1000000000.0
+sort_order = 14

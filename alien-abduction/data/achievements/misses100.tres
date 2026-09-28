@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/lock.png" id="1_btdwo"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_c6bw1"]
+
+[resource]
+script = ExtResource("2_c6bw1")
+id = &"misses100"
+display_name = "Daneben ist auch vorbei"
+description = "Verfehle 100 Mal."
+icon = ExtResource("1_btdwo")
+stat = &"misses"
+threshold = 100.0
+bonus = 0.03
+secret = true
+sort_order = 39

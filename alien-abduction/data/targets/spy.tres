@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/human_target.tscn" id="1_5gihm"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_punfp"]
+[ext_resource type="Texture2D" path="res://assets/sprites/spy.png" id="3_fou81"]
+
+[resource]
+script = ExtResource("2_punfp")
+id = &"spy"
+display_name = "Alien-Spion"
+textures = Array[Texture2D]([ExtResource("3_fou81")])
+scene = ExtResource("1_5gihm")
+base_hp = 2.0
+credits = 20.0
+alien_data = 3.0
+xp = 10.0
+mothership_charge = 3.0
+speed_max = 50.0
+spawn_weight = 1.6
+required_upgrade = &"r_spies"
+is_rare = true
+reaction_lines = Array[String](["Ich bin ein ganz normaler Mensch.", "Blubb... äh, Hallo!", "Tarnung aktiv!"])
+abduct_lines = Array[String](["Enttarnt! Das ist einer von uns. Peinlich."])

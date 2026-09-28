@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/effects/floating_text.gd" id="1_f"]
+
+[node name="FloatingText" type="Label"]
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_f")

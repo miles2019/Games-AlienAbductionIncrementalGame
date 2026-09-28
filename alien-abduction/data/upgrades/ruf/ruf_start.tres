@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/coin.png" id="1_q4il0"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_ivpm7"]
+
+[resource]
+script = ExtResource("2_ivpm7")
+id = &"ruf_start"
+display_name = "Startkapital"
+description = "Starte jeden Planeten mit +2.000 Credits pro Stufe."
+icon = ExtResource("1_q4il0")
+category = 6
+sort_order = 69
+currency = &"ruf"
+base_cost = 1.0
+cost_scaling = 1.8
+max_level = 10
+effect_stat = &"start_credits"
+effect_value = 2000.0
+resets_on_prestige = false

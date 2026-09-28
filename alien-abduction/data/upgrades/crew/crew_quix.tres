@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crew_quix.png" id="1_v4blw"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_4tisi"]
+
+[resource]
+script = ExtResource("2_4tisi")
+id = &"crew_quix"
+display_name = "Quix, Buchhalter"
+description = "+10 % Credits und +25 % Offline-Einnahmen."
+icon = ExtResource("1_v4blw")
+category = 2
+sort_order = 18
+cost_formula = 4
+base_cost = 60000.0
+max_level = 1
+effect_stat = &"credit_mult"
+effect_mode = 1
+effect_value = 0.1
+effect2_stat = &"offline_mult"
+effect2_value = 0.25
+flavor = "Laut meinen Büchern schulden uns die Kühe noch was."

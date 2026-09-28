@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/human_target.tscn" id="1_p6jjs"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_f3atr"]
+[ext_resource type="Texture2D" path="res://assets/sprites/engineer_0.png" id="3_024ff"]
+[ext_resource type="Texture2D" path="res://assets/sprites/engineer_1.png" id="4_tk4o7"]
+
+[resource]
+script = ExtResource("2_f3atr")
+id = &"engineer"
+display_name = "Ingenieur"
+textures = Array[Texture2D]([ExtResource("3_024ff"), ExtResource("4_tk4o7")])
+scene = ExtResource("1_p6jjs")
+credits = 1.5
+speed_max = 55.0
+spawn_weight = 40.0
+reaction_lines = Array[String](["Systemfehler!", "Wer hat das programmiert?!"])

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/power.png" id="1_2qdos"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_0fguw"]
+
+[resource]
+script = ExtResource("2_0fguw")
+id = &"sk_suck1"
+display_name = "Stärkerer Sog"
+description = "+1 Saugkraft pro Rang."
+icon = ExtResource("1_2qdos")
+category = 5
+sort_order = 40
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 5
+effect_stat = &"click_power"
+effect_value = 1.0
+requirements = Array[String](["sk_root"])
+resets_on_prestige = false
+tree_position = Vector2(0, -140)

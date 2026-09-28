@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/clock.png" id="1_2rmdn"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_udbrq"]
+
+[resource]
+script = ExtResource("2_udbrq")
+id = &"offline1"
+display_name = "Schlafwandler"
+description = "Sammle Offline-Einnahmen ein."
+icon = ExtResource("1_2rmdn")
+stat = &"offline_collected"
+sort_order = 38

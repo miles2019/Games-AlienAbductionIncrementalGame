@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="PlanetData" format=3]
+
+[ext_resource type="Resource" path="res://data/targets/golden_cow.tres" id="1_hgn0n"]
+[ext_resource type="Texture2D" path="res://assets/icons/planet_candy.png" id="2_pko1a"]
+[ext_resource type="Script" path="res://data/planet_data.gd" id="3_yy88n"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="4_8aw11"]
+[ext_resource type="Resource" path="res://data/targets/candy_person.tres" id="5_k06bs"]
+[ext_resource type="Resource" path="res://data/targets/gummy_cow.tres" id="6_2hoh1"]
+[ext_resource type="Resource" path="res://data/targets/candy_car.tres" id="7_hixh2"]
+[ext_resource type="Resource" path="res://data/targets/cat.tres" id="8_shk20"]
+[ext_resource type="Resource" path="res://data/targets/bird.tres" id="9_r0l40"]
+[ext_resource type="Resource" path="res://data/targets/celebrity.tres" id="10_1ujvs"]
+[ext_resource type="Resource" path="res://data/targets/spy.tres" id="11_bvu7s"]
+
+[resource]
+script = ExtResource("3_yy88n")
+id = &"candy"
+display_name = "Süßigkeitenplanet"
+description = "Alles ist essbar. Wirklich alles."
+icon = ExtResource("2_pko1a")
+order = 4
+ground_color = Color(1, 0.82, 0.9, 1)
+ground_color_2 = Color(0.98, 0.74, 0.86, 1)
+detail_color = Color(1, 0.6, 0.8, 1)
+detail_style = &"candy"
+targets = Array[ExtResource("4_8aw11")]([ExtResource("5_k06bs"), ExtResource("6_2hoh1"), ExtResource("7_hixh2"), ExtResource("8_shk20"), ExtResource("9_r0l40"), ExtResource("10_1ujvs"), ExtResource("11_bvu7s")])
+golden_target = ExtResource("1_hgn0n")
+credit_multiplier = 100.0
+target_speed_multiplier = 0.6
+beam_cooldown_multiplier = 1.25
+rule_text = "Klebrig: Ziele sind langsam, der Strahl lädt langsamer."

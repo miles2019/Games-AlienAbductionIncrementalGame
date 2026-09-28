@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_cow.png" id="1_5lyi6"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_komyd"]
+
+[resource]
+script = ExtResource("2_komyd")
+id = &"sk_cowmagnet"
+display_name = "Kuhmagnet"
+description = "Kühe erscheinen doppelt so oft, Biomasse x2."
+icon = ExtResource("1_5lyi6")
+category = 5
+sort_order = 59
+currency = &"skill_points"
+cost_formula = 4
+base_cost = 2.0
+cost_scaling = 1.0
+max_level = 1
+effect_stat = &"biomass_mult"
+effect_mode = 2
+effect_value = 2.0
+requirements = Array[String](["sk_combo"])
+resets_on_prestige = false
+branch = 2
+tree_position = Vector2(200, 370)

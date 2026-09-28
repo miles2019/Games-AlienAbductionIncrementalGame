@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/research.png" id="1_pcqsv"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_fg2g6"]
+
+[resource]
+script = ExtResource("2_fg2g6")
+id = &"research5"
+display_name = "Wissensdurst"
+description = "Schließe 5 Forschungen ab."
+icon = ExtResource("1_pcqsv")
+stat = &"research"
+threshold = 5.0
+sort_order = 27

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/multi.png" id="1_smcl6"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_sga0j"]
+
+[resource]
+script = ExtResource("2_sga0j")
+id = &"abd100k"
+display_name = "Wer macht das Licht aus?"
+description = "100.000 Entführungen."
+icon = ExtResource("1_smcl6")
+stat = &"abductions"
+threshold = 100000.0
+sort_order = 5

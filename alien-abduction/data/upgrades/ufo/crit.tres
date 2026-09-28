@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crit.png" id="1_renqy"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_7obxs"]
+
+[resource]
+script = ExtResource("2_7obxs")
+id = &"crit"
+display_name = "Kritische Entführung"
+description = "+2 % Chance auf eine kritische Entführung (x5 Credits)."
+icon = ExtResource("1_renqy")
+sort_order = 6
+base_cost = 250.0
+cost_scaling = 1.7
+max_level = 25
+effect_stat = &"crit_chance"
+effect_value = 0.02

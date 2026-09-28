@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/cow_target.tscn" id="1_805bw"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_vlonn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/camel.png" id="3_8r5jh"]
+
+[resource]
+script = ExtResource("2_vlonn")
+id = &"camel"
+display_name = "Kamel"
+textures = Array[Texture2D]([ExtResource("3_8r5jh")])
+shadow_width = 22.0
+scene = ExtResource("1_805bw")
+base_hp = 3.0
+weight = 2.0
+credits = 4.0
+biomass = 3.0
+xp = 2.0
+mothership_charge = 2.0
+speed_min = 15.0
+speed_max = 28.0
+spawn_weight = 28.0
+reaction = 2
+sound = &"moo"
+reaction_lines = Array[String](["Pffft!", "*spuckt*", "Hmpf."])

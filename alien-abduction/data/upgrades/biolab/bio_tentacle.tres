@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/dna.png" id="1_b5h82"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_1uo4o"]
+
+[resource]
+script = ExtResource("2_1uo4o")
+id = &"bio_tentacle"
+display_name = "Drohnen-Tentakel"
+description = "+1 Drohnen-Stärke, +5 % Drohnentempo."
+icon = ExtResource("1_b5h82")
+category = 3
+sort_order = 20
+currency = &"biomass"
+base_cost = 20.0
+cost_scaling = 1.6
+effect_stat = &"drone_power"
+effect_value = 1.0
+effect2_stat = &"drone_speed"
+effect2_value = 0.05

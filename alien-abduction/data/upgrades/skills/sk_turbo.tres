@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/speed.png" id="1_vgbil"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_wcod1"]
+
+[resource]
+script = ExtResource("2_wcod1")
+id = &"sk_turbo"
+display_name = "Turbo-Spule"
+description = "Strahl lädt 8 % schneller pro Rang."
+icon = ExtResource("1_vgbil")
+category = 5
+sort_order = 42
+currency = &"skill_points"
+cost_formula = 1
+base_cost = 1.0
+cost_scaling = 1.0
+max_level = 5
+effect_stat = &"beam_cooldown"
+effect_mode = 2
+effect_value = 0.92
+requirements = Array[String](["sk_suck1"])
+resets_on_prestige = false
+tree_position = Vector2(120, -250)

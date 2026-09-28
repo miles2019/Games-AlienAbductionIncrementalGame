@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_beiboot.png" id="1_ylovg"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_vi85e"]
+
+[resource]
+script = ExtResource("2_vi85e")
+id = &"beiboot"
+display_name = "Mutterschiff-Beiboot"
+description = "Saugt ganze Gruppen ein und lädt das Mutterschiff passiv auf."
+icon = ExtResource("1_ylovg")
+category = 1
+sort_order = 13
+base_cost = 120000.0
+cost_scaling = 1.2
+effect_stat = &"beiboot_count"
+effect_value = 1.0
+effect2_stat = &"mothership_passive"
+effect2_mode = 0
+effect2_value = 0.6
+requirements = Array[String](["laser:2"])

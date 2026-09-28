@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_patrol.png" id="1_tg6kv"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_vldkg"]
+
+[resource]
+script = ExtResource("2_vldkg")
+id = &"crew100"
+display_name = "Armada"
+description = "Besitze 100 Flotten-Einheiten."
+icon = ExtResource("1_tg6kv")
+stat = &"crew_total"
+threshold = 100.0
+sort_order = 18

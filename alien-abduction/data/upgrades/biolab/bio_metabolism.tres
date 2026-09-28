@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/charge.png" id="1_j8p8g"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_syvq4"]
+
+[resource]
+script = ExtResource("2_syvq4")
+id = &"bio_metabolism"
+display_name = "Hyper-Stoffwechsel"
+description = "+12 % Mutterschiff-Ladung."
+icon = ExtResource("1_j8p8g")
+category = 3
+sort_order = 22
+currency = &"biomass"
+base_cost = 30.0
+cost_scaling = 1.6
+max_level = 25
+effect_stat = &"charge_mult"
+effect_mode = 1
+effect_value = 0.12

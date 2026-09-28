@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/beam_rainbow.png" id="1_o01jp"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_jl1en"]
+
+[resource]
+script = ExtResource("2_jl1en")
+id = &"beam_rainbow"
+display_name = "Strahl: Regenbogen"
+description = "Alle Farben. Gleichzeitig."
+icon = ExtResource("1_o01jp")
+category = 7
+sort_order = 81
+cost_formula = 4
+base_cost = 300000.0
+max_level = 1
+resets_on_prestige = false

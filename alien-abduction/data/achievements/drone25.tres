@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_drone.png" id="1_ftu6t"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_uebgd"]
+
+[resource]
+script = ExtResource("2_uebgd")
+id = &"drone25"
+display_name = "Schwarmintelligenz"
+description = "Besitze 25 Mini-Drohnen."
+icon = ExtResource("1_ftu6t")
+stat = &"drones"
+threshold = 25.0
+sort_order = 17

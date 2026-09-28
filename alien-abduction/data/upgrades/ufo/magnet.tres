@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/magnet.png" id="1_5461c"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_owmrj"]
+
+[resource]
+script = ExtResource("2_owmrj")
+id = &"magnet"
+display_name = "Anlock-Signal"
+description = "+3 % Chance, dass Entführte neue Ziele anlocken."
+icon = ExtResource("1_5461c")
+sort_order = 7
+base_cost = 500.0
+cost_scaling = 1.8
+max_level = 20
+effect_stat = &"lure_chance"
+effect_value = 0.03

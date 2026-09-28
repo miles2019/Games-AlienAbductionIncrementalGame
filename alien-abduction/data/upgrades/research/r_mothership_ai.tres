@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_beiboot.png" id="1_e1r2s"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_p544f"]
+
+[resource]
+script = ExtResource("2_p544f")
+id = &"r_mothership_ai"
+display_name = "Mutterschiff-KI"
+description = "Das Mutterschiff wird automatisch gerufen, sobald es bereit ist."
+icon = ExtResource("1_e1r2s")
+category = 4
+sort_order = 38
+currency = &"data"
+cost_formula = 4
+base_cost = 80.0
+max_level = 1
+effect_stat = &"auto_mothership"
+effect_mode = 3
+effect_value = 1.0
+requirements = Array[String](["r_boss"])
+resets_on_prestige = false

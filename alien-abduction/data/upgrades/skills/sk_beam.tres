@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/multi.png" id="1_vdmu3"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_fljal"]
+
+[resource]
+script = ExtResource("2_fljal")
+id = &"sk_beam"
+display_name = "Beam me up!"
+description = "Ein Klick saugt eine kleine Gruppe ein: +2 Ziele pro Strahl."
+icon = ExtResource("1_vdmu3")
+category = 5
+sort_order = 43
+currency = &"skill_points"
+cost_formula = 4
+base_cost = 3.0
+cost_scaling = 1.0
+max_level = 1
+effect_stat = &"max_captures"
+effect_value = 2.0
+requirements = Array[String](["sk_wide"])
+resets_on_prestige = false
+tree_position = Vector2(-190, -370)

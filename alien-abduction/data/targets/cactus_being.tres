@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TargetData" format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/targets/human_target.tscn" id="1_wjxp6"]
+[ext_resource type="Script" path="res://data/target_data.gd" id="2_cwsrd"]
+[ext_resource type="Texture2D" path="res://assets/sprites/cactus_being.png" id="3_2kgws"]
+
+[resource]
+script = ExtResource("2_cwsrd")
+id = &"cactus_being"
+display_name = "Kaktuswesen"
+textures = Array[Texture2D]([ExtResource("3_2kgws")])
+scene = ExtResource("1_wjxp6")
+base_hp = 2.0
+credits = 3.0
+biomass = 2.0
+data_chance = 0.03
+xp = 2.0
+speed_min = 20.0
+speed_max = 40.0
+spawn_weight = 15.0
+reaction_lines = Array[String](["Pieks!", "Nicht anfassen!", "Ich bin stachelig!"])

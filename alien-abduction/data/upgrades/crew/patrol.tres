@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_patrol.png" id="1_junsq"]
+[ext_resource type="Script" path="res://data/upgrade_data.gd" id="2_f6opy"]
+
+[resource]
+script = ExtResource("2_f6opy")
+id = &"patrol"
+display_name = "Patrouillen-UFO"
+description = "5x Drohnen-Stärke, saugt bis zu 3 Ziele auf einmal."
+icon = ExtResource("1_junsq")
+category = 1
+sort_order = 11
+base_cost = 700.0
+cost_scaling = 1.16
+effect_stat = &"patrol_count"
+effect_value = 1.0
+requirements = Array[String](["drone:5"])
+flavor = "Patrouille startklar. Sie hat sogar Blaulicht. Also, Rotlicht."

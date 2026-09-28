@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/crit.png" id="1_i811o"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_0ipqu"]
+
+[resource]
+script = ExtResource("2_0ipqu")
+id = &"combo60"
+display_name = "Tierisch effizient"
+description = "Erreiche eine 60er-Combo."
+icon = ExtResource("1_i811o")
+stat = &"best_combo"
+threshold = 60.0
+sort_order = 10

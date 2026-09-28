@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/t_celebrity.png" id="1_mqxay"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_sjtg2"]
+
+[resource]
+script = ExtResource("2_sjtg2")
+id = &"celeb1"
+display_name = "Autogramm bitte!"
+description = "Entführe einen Prominenten."
+icon = ExtResource("1_mqxay")
+stat = &"abducted_celebrity"
+sort_order = 32

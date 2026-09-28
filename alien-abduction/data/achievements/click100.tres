@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/icons/power.png" id="1_e6igq"]
+[ext_resource type="Script" path="res://data/achievement_data.gd" id="2_1eiba"]
+
+[resource]
+script = ExtResource("2_1eiba")
+id = &"click100"
+display_name = "Kleine Hände, großer Sauger"
+description = "Klicke 100 Mal."
+icon = ExtResource("1_e6igq")
+stat = &"clicks"
+threshold = 100.0
+sort_order = 2

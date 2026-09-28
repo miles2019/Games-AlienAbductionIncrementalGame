@@ -1,0 +1,43 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scenes/main/world_ground.gd" id="2_g"]
+[ext_resource type="Script" path="res://scenes/main/event_director.gd" id="3_ed"]
+[ext_resource type="PackedScene" path="res://scenes/ufo/laser_satellite.tscn" id="4_ls"]
+[ext_resource type="Script" path="res://scenes/effects/effects_layer.gd" id="5_fx"]
+[ext_resource type="PackedScene" path="res://scenes/ufo/ufo.tscn" id="6_ufo"]
+[ext_resource type="PackedScene" path="res://scenes/ufo/mothership.tscn" id="7_ms"]
+[ext_resource type="Script" path="res://scenes/effects/screen_shake.gd" id="8_cam"]
+[ext_resource type="Script" path="res://scenes/main/spawner.gd" id="9_sp"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="10_hud"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="WorldGround" type="Node2D" parent="."]
+script = ExtResource("2_g")
+
+[node name="EventDirector" type="Node2D" parent="."]
+script = ExtResource("3_ed")
+
+[node name="Targets" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Helpers" type="Node2D" parent="."]
+
+[node name="LaserSatellite" parent="." instance=ExtResource("4_ls")]
+
+[node name="UFO" parent="." instance=ExtResource("6_ufo")]
+
+[node name="Mothership" parent="." instance=ExtResource("7_ms")]
+
+[node name="Effects" type="Node2D" parent="."]
+script = ExtResource("5_fx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("8_cam")
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource("9_sp")
+
+[node name="HUD" parent="." instance=ExtResource("10_hud")]
